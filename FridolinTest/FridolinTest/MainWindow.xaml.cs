@@ -34,6 +34,13 @@ namespace Friedrich
 
         public void move()
         { }
+        public void main(String[] args) //kleine Test, zum debuggen ;)
+        {
+            Nation Frankreich = new Nation();
+            TownListing BingenTowns = new TownListing();
+            Town Bingen = new Town("Bingen","Herz",Frankreich,BingenTowns);
+            Town 
+        }
     }
 
     class General : Character
@@ -50,13 +57,24 @@ namespace Friedrich
 
     class Town
     {
-        string name;
-        static int counter;
+        String name;
+        static int counter=0;
         int id;
-        string tacticalColor;
+        String tacticalColor;
         Nation nation;
         TownListing towns;
         Listing inTown;
+
+        public Town(String newName, String newTacticalColor, Nation newNation, TownListing newTowns)
+        {
+            id = counter;
+            counter++;
+            name = newName;
+            tacticalColor = newTacticalColor;
+            nation = newNation;
+            towns = newTowns;
+            inTown = new Listing();
+        }
     
          public TownListing reachDefense(int distance) // Startmethode
          {
