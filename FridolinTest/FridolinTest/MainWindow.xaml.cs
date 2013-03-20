@@ -37,9 +37,23 @@ namespace Friedrich
         public void main(String[] args) //kleine Test, zum debuggen ;)
         {
             Nation Frankreich = new Nation();
-            TownListing BingenTowns = new TownListing();
-            Town Bingen = new Town("Bingen","Herz",Frankreich,BingenTowns);
-            Town 
+            Nation Hannover = new Nation();
+            Town Bingen = new Town("Bingen", "Herz", Frankreich);
+            Town Mainz = new Town("Mainz", "Herz", Frankreich);
+            Town Wiesbaden = new Town("Wiesbaden", "Herz", Frankreich);
+            Town Boppard = new Town("Boppard", "Herz", Frankreich);
+            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
+            Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
+
+            Town Kassel = new Fort("Kassel", "Pik", Hannover); // Für Festungen
+
+            Bingen.towns.add(Mainz, Boppard);
+            Mainz.towns.add(Bingen, Wiesbaden);
+            Wiesbaden.towns.add(Mainz, Limburg);
+            Limburg.towns.add(Wiesbaden, Koblenz);
+            Koblenz.towns.add(Boppard, Limburg);
+            Boppard.towns.add(Koblenz, Bingen);
+
         }
     }
 
@@ -55,24 +69,24 @@ namespace Friedrich
 
     }
 
-    class Town
+    public class Town
     {
-        String name;
-        static int counter=0;
-        int id;
-        String tacticalColor;
-        Nation nation;
-        TownListing towns;
-        Listing inTown;
+        public String name;
+        public static int counter = 0;
+        public int id;
+        public String tacticalColor;
+        public Nation nation;
+        public TownListing towns;
+        public Listing inTown;
 
-        public Town(String newName, String newTacticalColor, Nation newNation, TownListing newTowns)
+        public Town(String newName, String newTacticalColor, Nation newNation)
         {
             id = counter;
             counter++;
             name = newName;
             tacticalColor = newTacticalColor;
             nation = newNation;
-            towns = newTowns;
+            towns = new TownListing();
             inTown = new Listing();
         }
     
@@ -151,6 +165,59 @@ namespace Friedrich
             number++; //erhöhe Listenanzahl
         }
 
+        public void add(Town newObject1, Town newObject2)
+        {
+            TownListElement newElement1 = new TownListElement(newObject1);
+            TownListElement newElement2 = new TownListElement(newObject2);
+            newElement1.next = head.next;
+            newElement2.next = newElement1;
+            head.next = newElement2;
+            number += 2; //erhöhe Listenanzahl
+        }
+
+        public void add(Town newObject1, Town newObject2, Town newObject3)
+        {
+            TownListElement newElement1 = new TownListElement(newObject1);
+            TownListElement newElement2 = new TownListElement(newObject2);
+            TownListElement newElement3 = new TownListElement(newObject3);
+            newElement1.next = head.next;
+            newElement2.next = newElement1;
+            newElement3.next = newElement2;
+            head.next = newElement3;
+            number += 3; //erhöhe Listenanzahl
+        }
+
+        public void add(Town newObject1, Town newObject2, Town newObject3, Town newObject4)
+        {
+            TownListElement newElement1 = new TownListElement(newObject1);
+            TownListElement newElement2 = new TownListElement(newObject2);
+            TownListElement newElement3 = new TownListElement(newObject3);
+            TownListElement newElement4 = new TownListElement(newObject4);
+            newElement1.next = head.next;
+            newElement2.next = newElement1;
+            newElement3.next = newElement2;
+            newElement4.next = newElement3;
+            head.next = newElement4;
+            number += 4; //erhöhe Listenanzahl
+        }
+
+        public void add(Town newObject1, Town newObject2, Town newObject3, Town newObject4, Town newObject5)
+        {
+            TownListElement newElement1 = new TownListElement(newObject1);
+            TownListElement newElement2 = new TownListElement(newObject2);
+            TownListElement newElement3 = new TownListElement(newObject3);
+            TownListElement newElement4 = new TownListElement(newObject4);
+            TownListElement newElement5 = new TownListElement(newObject5);
+            newElement1.next = head.next;
+            newElement2.next = newElement1;
+            newElement3.next = newElement2;
+            newElement4.next = newElement3;
+            newElement5.next = newElement4;
+            head.next = newElement5;
+            number += 5; //erhöhe Listenanzahl
+        }
+
+
         public bool search(Town toFind) //das fragt die liste ob das einzutragende schon in der liste ist
         {
             return head.find(toFind);
@@ -181,6 +248,7 @@ namespace Friedrich
             head.next = newElement;
             number++; //erhöhe Listenanzahl
         }
+
 
         public bool search(Object toFind) //das fragt die liste ob das einzutragende schon in der liste ist
         {
