@@ -23,14 +23,14 @@ namespace Friedrich
     }*/
 
     //Klassen
-    class Character
+    public class Character
     {
-        int name;
-        static int counter;
-        int id;
-        Town position;
-        Nation nation;
-        int movePoints;
+        public int name;
+        public static int counter;
+        public int id;
+        public Town position;
+        public Nation nation;
+        public int movePoints;
 
         public void move()
         { }
@@ -45,7 +45,7 @@ namespace Friedrich
             Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
             Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
 
-            Town Kassel = new Fort("Kassel", "Pik", Hannover); // Für Festungen
+            Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
 
             Bingen.towns.add(Mainz, Boppard);
             Mainz.towns.add(Bingen, Wiesbaden);
@@ -57,14 +57,14 @@ namespace Friedrich
         }
     }
 
-    class General : Character
+    public class General : Character
     {
-        bool supply;
-        int army;
-        bool onRetreat;
+        public bool supply;
+        public int army;
+        public bool onRetreat;
     }
 
-    class Baggage : Character
+    public class Baggage : Character
     {
 
     }
@@ -128,34 +128,39 @@ namespace Friedrich
         }
     }
 
-    class Fort : Town
+    public class Fort : Town
     {
-        Nation conquerNation;
-        bool conquered;
+        public Nation conquerNation;
+        public bool conquered=false;
+        public Fort(String newName, String newTacticalColor, Nation newNation, Nation newConquerNation):base(newName, newTacticalColor, newNation)
+        {
+            conquerNation = newConquerNation;
+        }
         //Problem mit Fragezeichen - Abgegdeckte Festung, durch Vertreibung nach Kampf nicht mehr abgedeckt
     }
 
-    class Nation
+    public class Nation
     {
-        Listing generals;
-        Listing forts;
-        Listing cards;
-        Listing startTowns;
-        Listing allies;
+        public Listing generals;
+        public Listing forts;
+        public Listing cards;
+        public Listing startTowns;
+        public Listing allies;
+        public int maxArmies;
     }
 
-    class Card
+    public class Card
     {
-        static int counter;
-        int id;
-        string tacticalColor;
-        int value;
+        public static int counter;
+        public int id;
+        public string tacticalColor;
+        public int value;
     }
 
-    class TownListing
+    public class TownListing
     {
         public TownListElement head;
-        int number = 0;
+        public int number = 0;
 
         public void add(Town newObject)
         {
@@ -236,10 +241,10 @@ namespace Friedrich
             head = new TownListElement(null);
         }
     }
-    class Listing
+    public class Listing
     {
         public ListElement head;
-        int number = 0;
+        public int number = 0;
 
         public void add(Object newObject)
         {
@@ -269,8 +274,8 @@ namespace Friedrich
         }
     }
 
- 
-    class ListElement
+
+    public class ListElement
     {
         public ListElement next;
         public Object data;
@@ -310,7 +315,7 @@ namespace Friedrich
             return next.find(toFind);
         }
     }
-    class TownListElement
+    public class TownListElement
     {
         public TownListElement next;
         public Town data;
