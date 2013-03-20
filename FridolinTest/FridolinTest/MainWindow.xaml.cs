@@ -14,13 +14,13 @@ using System.Windows.Shapes;
 
 namespace Friedrich
 {
-    public partial class MainWindow : Window
+    /*public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
-    }
+    }*/
 
     //Klassen
     class Character
@@ -57,13 +57,13 @@ namespace Friedrich
         Nation nation;
         TownListing towns;
         Listing inTown;
-
-        public Listing reachDefense(int distance) // Startmethode
-        {
+    
+         public TownListing reachDefense(int distance) // Startmethode
+         {
+            TownListing result = new TownListing();
             if (distance > 0)
             {
-                TownListing result = new TownListing();
-                ListElement a = towns.head;
+                TownListElement a = towns.head;
                 do
                 {
                   a = a.next;
@@ -76,12 +76,13 @@ namespace Friedrich
                 return result;
 
             }
+            return result;
         }
         public void reachDefense(int distance, TownListing result) // methode bezüglich versorgung und abdeckung
         {
             if (distance > 0)
             {
-                ListElement a = towns.head;
+                TownListElement a = towns.head;
                 do
                 {
                     a = a.next;
@@ -119,6 +120,37 @@ namespace Friedrich
         int value;
     }
 
+    class TownListing
+    {
+        public TownListElement head;
+        int number = 0;
+
+        public void add(Town newObject)
+        {
+            TownListElement newElement = new TownListElement(newObject);
+            newElement.next = head.next;
+            head.next = newElement;
+            number++; //erhöhe Listenanzahl
+        }
+
+        public bool search(Town toFind) //das fragt die liste ob das einzutragende schon in der liste ist
+        {
+            return head.find(toFind);
+        }
+
+        public void remove(Town toRemove) //Methode zum löschen eines Objektes aus einer Liste
+        {
+           if (head.rm(toRemove)) //Start am Kopf
+           {
+               number--; //verringere Listenanzahl
+           }
+        }
+
+        public TownListing()
+        {
+            head = new TownListElement(null);
+        }
+    }
     class Listing
     {
         public ListElement head;
@@ -150,6 +182,7 @@ namespace Friedrich
             head = new ListElement(null);
         }
     }
+
  
     class ListElement
     {
@@ -191,18 +224,15 @@ namespace Friedrich
             return next.find(toFind);
         }
     }
-
-
-}
-class TownListElement
-{
+    class TownListElement
+    {
         public TownListElement next;
         public Town data;
-        public TownListElement(Object newTown)
+        public TownListElement(Town newTown)
         {
-            data = newObject;
+            data = newTown;
         }
-        public bool rm(Object toRemove)
+        public bool rm(Town toRemove)
         {
             if (next.data == toRemove) //falls der Inhalt des nächsten Objekt das löschende ist
             {
@@ -218,7 +248,7 @@ class TownListElement
 
         }
 
-        public bool find(Object toFind)
+        public bool find(Town toFind)
         {
 
             if (data == toFind)
