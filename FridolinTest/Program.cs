@@ -10,9 +10,10 @@ namespace Fridolin
         static void Main(string[] args)
         {
             //Nationen
-            Nation Frankreich = new Nation();
-            Nation Hannover = new Nation();
+            Nation Frankreich = new Nation(20);
+            Nation Hannover = new Nation(12);
 
+            
             //Städte
             Town Bingen = new Town("Bingen", "Herz", Frankreich);
             Town Mainz = new Town("Mainz", "Herz", Frankreich);
@@ -45,9 +46,18 @@ namespace Fridolin
             Town Corbach = new Town("Corbach", "Kreuz", Frankreich);
             Town Wildungen = new Town("Wildungen", "Kreuz", Frankreich);//30
             Town Alsfeld = new Town("Alsfeld", "Kreuz", Frankreich);
-            
+            Town Iserlohn = new Town("Iserlohn", "Herz", Frankreich);
+            Town Fulda = new Town("Fulda", "Karo", Frankreich);
+            Town Schlüchtern = new Town("Schlüchtern", "Karo", Hannover);
+            Town Gelnhausen = new Town("Gelnhausen", "Herz", Frankreich);//35
+            Town Alfeld = new Town("Alfeld", "Pik", Hannover);
+            Town Northeim = new Town("Northeim", "Pik", Hannover);         
+            Town Münden = new Town("Münden", "Pik", Hannover);
+            Town Fritzlar = new Town("Fritzlar", "Karo", Hannover);
+
             //Fort(Zielstädte/Festungen)
-            Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
+            Town Kassel = new Fort("Kassel", "Karo", Hannover, Frankreich); // Für Festungen
+            Fort Göttingen = new Fort("Göttingen", "Pik", Hannover, Frankreich);
 
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
@@ -75,38 +85,46 @@ namespace Fridolin
             Biedenkopf.towns.add(Siegen, Marburg);
             Dillenburg.towns.add(Siegen, Marburg, Wetzlar);
             Marburg.towns.add(Biedenkopf, Dillenburg, Gießen, Alsfeld, Frankenberg);//25
-            Alsfeld.towns.add(Marburg);
+            Alsfeld.towns.add(Marburg, Fritzlar);
             Frankenberg.towns.add(Corbach, Wildungen, Marburg);
             Corbach.towns.add(Frankenberg);
             Wildungen.towns.add(Frankenberg);
             Meschede.towns.add(Olpe);//30
             Olpe.towns.add(Meschede, Waldbröll, Siegen);
+            Iserlohn.towns.add(Olpe);
+            Fulda.towns.add(Schlüchtern);
+            Schlüchtern.towns.add(Gelnhausen, Fulda);
+            Gelnhausen.towns.add(Schlüchtern, Hanau);//35
+            Alfeld.towns.add(Northeim);
+            Northeim.towns.add(Alfeld, Göttingen);
+            Göttingen.towns.add(Alfeld);
+            Fritzlar.towns.add(Alsfeld, Kassel);
+            Kassel.towns.add(Fritzlar, Münden);//40
+            Münden.towns.add(Kassel, Göttingen);
 
 
-            
+
+            General Cumberland = new General("Cumberland", Alfeld, Hannover); 
+
+            General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
+            General Soubise = new General("Soubise", Fulda, Frankreich);
+            General Chevert = new General("Chevert", Iserlohn, Frankreich);
+
+
+
+
             //System.Console.WriteLine(Koblenz.towns.resultString());
             //System.Console.WriteLine(Wiesbaden.towns.resultString());
-            System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
+            //System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
             //System.Console.WriteLine(Wiesbaden.reachDefense(2).resultString());
             //System.Console.WriteLine(Wiesbaden.reachDefense(1).resultString());
+            //System.Console.ReadKey();
+
+
+            System.Console.WriteLine("guck guck");
             System.Console.ReadKey();
-
-
         }
     }
-    //public partial class MainWindow : Window
-    //{
-    //    public MainWindow()
-    //    {
-    //        InitializeComponent();
-    //    }
-
-    //    private void button1_Click(object sender, RoutedEventArgs e)
-    //    {
-    //        label1.content = (Koblenz.reachDefense(2).resultString());
-           
-    //    }
-    //}
 
 
     //Klassen
@@ -143,6 +161,9 @@ namespace Fridolin
         public General(string newName, Town newTown, Nation newNation):base(newTown, newNation, 12)
         { 
             name = newName;
+
+            newNation.generals.add(this);
+
         }
     }
 
@@ -243,6 +264,12 @@ namespace Fridolin
         public Listing startTowns;
         public Listing allies;
         public int maxArmies;
+
+        public Nation(int newMaxArmy)
+        {
+            generals = new Listing();
+
+        }
     }
 
     public class Card
@@ -348,8 +375,6 @@ namespace Fridolin
             if (result == "")
                 result = "leer";
             return result;
-
-
         }
     } // ende: public class TownListing
 
@@ -365,7 +390,6 @@ namespace Fridolin
             head.next = newElement;
             number++; //erhöhe Listenanzahl
         }
-
 
         public bool search(Object toFind) //das fragt die liste ob das einzutragende schon in der liste ist
         {
@@ -384,7 +408,27 @@ namespace Fridolin
         {
             head = new ListElement(null);
         }
-    }
+
+
+     /*   public String resultString()
+        {
+            String result = "";
+            ListElement a = head.next;
+            for (int i = 0; i < number; i++)
+            {
+                try
+                {
+                    result += ", " + i + ". " + a.data.name;
+                }
+                a = a.next;
+            }
+            if (result == "")
+                result = "leer";
+            return result;
+        }
+        */
+
+   }
 
     public class ListElement
     {
