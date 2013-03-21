@@ -28,8 +28,10 @@ namespace Friedrich
             Town Boppard = new Town("Boppard", "Herz", Frankreich);
             Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
             Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
-            //Fort(Zielstädte)
+            
+            //Fort(Zielstädte/Festungen)
             Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
+            
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
             Mainz.towns.add(Bingen, Wiesbaden);
@@ -43,39 +45,50 @@ namespace Friedrich
         }
     }
 
-    /*public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-    }*/
 
     //Klassen
     public class Character
-    {
-        public int name;
+    {      
         public static int counter;
         public int id;
         public Town position;
         public Nation nation;
         public int movePoints;
 
+        public Character(Town newTown, Nation newNation, int newMovePoints)
+        { 
+            id = counter;
+            counter++;
+            nation = newNation;
+            position = newTown;
+            movePoints = newMovePoints;
+        }
+
         public void move()
-        { }
-        
+        { 
+            
+        }        
     }
 
     public class General : Character
     {
-        public bool supply;
-        public int army;
-        public bool onRetreat;
+        public bool supply = true; 
+        public int army = 1;
+        public bool onRetreat = false;
+        public string name;
+
+        public General(string newName, Town newTown, Nation newNation):base(newTown, newNation, 12)
+        { 
+            name = newName;
+        }
     }
 
     public class Baggage : Character
     {
+        public Baggage(Town newTown, Nation newNation):base(newTown, newNation, 9)
+        {
 
+        }
     }
 
     public class Town
@@ -118,7 +131,8 @@ namespace Friedrich
 
             }
             return result;
-        }
+           }
+
         public void reachDefense(int distance, TownListing result) // methode bezüglich versorgung und abdeckung
         {
             if (distance > 0)
@@ -135,7 +149,7 @@ namespace Friedrich
             }    
 
         }
-    }
+    }// class Town Ende
 
     public class Fort : Town
     {
@@ -239,10 +253,10 @@ namespace Friedrich
 
         public void remove(Town toRemove) //Methode zum löschen eines Objektes aus einer Liste
         {
-           if (head.rm(toRemove)) //Start am Kopf
-           {
-               number--; //verringere Listenanzahl
-           }
+            if (head.rm(toRemove)) //Start am Kopf
+            {
+                number--; //verringere Listenanzahl
+            }
         }
 
         public TownListing()
@@ -251,8 +265,10 @@ namespace Friedrich
         }
         public String ToString()
         {
-            String result =
-    }
+            
+        }
+    } // ende: public class TownListing
+
     public class Listing
     {
         public ListElement head;
@@ -285,7 +301,6 @@ namespace Friedrich
             head = new ListElement(null);
         }
     }
-
 
     public class ListElement
     {
@@ -327,6 +342,7 @@ namespace Friedrich
             return next.find(toFind);
         }
     }
+
     public class TownListElement
     {
         public TownListElement next;
@@ -335,6 +351,7 @@ namespace Friedrich
         {
             data = newTown;
         }
+
         public bool rm(Town toRemove)
         {
             if (next.data == toRemove) //falls der Inhalt des nächsten Objekt das löschende ist
@@ -348,12 +365,10 @@ namespace Friedrich
                return false;
             }
             return next.rm(toRemove); //Rufe das nächste Objekt auf
-
         }
 
         public bool find(Town toFind)
         {
-
             if (data == toFind)
             {
                 return true;
@@ -366,7 +381,8 @@ namespace Friedrich
 
             return next.find(toFind);
         }
-    }
+    } // Ende public class TownListElement
+
 
 
 }
