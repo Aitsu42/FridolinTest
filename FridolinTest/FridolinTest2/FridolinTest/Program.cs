@@ -2,40 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-
-
-
-
-
-namespace Friedrich
+namespace Fridolin
 {
-    //public partial class MainWindow : Window
-    //{
-    //    public MainWindow()
-    //    {
-    //        InitializeComponent();
-    //    }
-
-    //    private void button1_Click(object sender, RoutedEventArgs e)
-    //    {
-    //        label1.content = (Koblenz.reachDefense(2).resultString());
-           
-    //    }
-    //}
-
-    public class Test
+    class Program
     {
-        public void Main(String[] args) //kleiner Test, zum debuggen ;)
+        static void Main(string[] args)
         {
             //Nationen
             Nation Frankreich = new Nation();
@@ -55,10 +27,10 @@ namespace Friedrich
             Town Darmstadt = new Town("Darmstadt", "Kreuz", Frankreich);
             Town Frankfurt = new Town("Frankfurt", "Kreuz", Frankreich);
             Town Hanau = new Town("Hanau", "Kreuz", Hannover);
-                        
+
             //Fort(Zielstädte/Festungen)
             Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
-            
+
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
             Mainz.towns.add(Bingen, Wiesbaden, Oppenheim);
@@ -73,11 +45,27 @@ namespace Friedrich
 
 
 
-            System.Console.WriteLine("Hallo");
+            System.Console.WriteLine(Koblenz.towns.resultString());
+            System.Console.WriteLine(Wiesbaden.towns.resultString());
+            System.Console.WriteLine(Koblenz.reachDefense(2).resultString());
+            System.Console.ReadKey();
 
 
         }
     }
+    //public partial class MainWindow : Window
+    //{
+    //    public MainWindow()
+    //    {
+    //        InitializeComponent();
+    //    }
+
+    //    private void button1_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        label1.content = (Koblenz.reachDefense(2).resultString());
+           
+    //    }
+    //}
 
 
     //Klassen
@@ -155,7 +143,7 @@ namespace Friedrich
                 do
                 {
                   a = a.next;
-                  if (result.search(a.data))
+                  if (!result.search(a.data))
                   {
                       result.add(a.data);
                       a.data.reachDefense(distance - 1, result);
@@ -175,7 +163,7 @@ namespace Friedrich
                 do
                 {
                     a = a.next;
-                    if (result.search(a.data))
+                    if (!result.search(a.data))
                         result.add(a.data);
                     reachDefense(distance - 1, result);
 
@@ -303,9 +291,11 @@ namespace Friedrich
             TownListElement a = head.next;
             for (int i = 0; i < number; i++)
             {
-                result += a.data.name;
+                result += ", "+i+". "+a.data.name;
                 a = a.next;
             }
+            if (result == "")
+                result = "leer";
             return result;
 
 
