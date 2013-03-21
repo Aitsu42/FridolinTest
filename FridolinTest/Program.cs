@@ -18,16 +18,34 @@ namespace Fridolin
             Town Mainz = new Town("Mainz", "Herz", Frankreich);
             Town Wiesbaden = new Town("Wiesbaden", "Herz", Frankreich);
             Town Boppard = new Town("Boppard", "Herz", Frankreich);
-            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
+            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);//5
             Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
-            Town Oppenheim = new Town("Oppenheim", "Kreuz", Frankreich);
-            Town Worms = new Town("Worms", "Kreuz", Frankreich);
-            Town Mannheim = new Town("Mannheim", "Kreuz", Frankreich);
-            Town Bensheim = new Town("Bensheim", "Kreuz", Frankreich);
-            Town Darmstadt = new Town("Darmstadt", "Kreuz", Frankreich);
-            Town Frankfurt = new Town("Frankfurt", "Kreuz", Frankreich);
-            Town Hanau = new Town("Hanau", "Kreuz", Hannover);
-
+            Town Oppenheim = new Town("Oppenheim", "Herz", Frankreich);
+            Town Worms = new Town("Worms", "Herz", Frankreich);
+            Town Mannheim = new Town("Mannheim", "Herz", Frankreich);
+            Town Bensheim = new Town("Bensheim", "Herz", Frankreich);//10
+            Town Darmstadt = new Town("Darmstadt", "Herz", Frankreich);
+            Town Frankfurt = new Town("Frankfurt", "Herz", Frankreich);
+            Town Hanau = new Town("Hanau", "Herz", Hannover);
+            Town Aschaffenburg = new Town("Aschaffenburg", "Herz", Frankreich);
+            Town Weilburg = new Town("Weilburg", "Kreuz", Frankreich);//15
+            Town Wetzlar = new Town("Wetzlar", "Kreuz", Frankreich);
+            Town Gießen = new Town("Gießen", "Kreuz", Frankreich);
+            Town Nauheim = new Town("Nauheim", "Kreuz", Frankreich);
+            Town Homburg = new Town("Homburg", "Kreuz", Frankreich);
+            Town Betzdorf = new Town("Betzdorf", "Kreuz", Frankreich);//20
+            Town Waldbröll = new Town("Waldbröll", "Kreuz", Frankreich);
+            Town Olpe = new Town("Olpe", "Kreuz", Frankreich);
+            Town Meschede = new Town("Meschede", "Kreuz", Frankreich);
+            Town Siegen = new Town("Siegen", "Kreuz", Frankreich);
+            Town Biedenkopf = new Town("Biedenkopf", "Kreuz", Frankreich);//25
+            Town Dillenburg = new Town("Dillenburg", "Kreuz", Frankreich);
+            Town Marburg = new Town("Marburg", "Kreuz", Frankreich);
+            Town Frankenberg = new Town("Frankenberg", "Kreuz", Frankreich);
+            Town Corbach = new Town("Corbach", "Kreuz", Frankreich);
+            Town Wildungen = new Town("Wildungen", "Kreuz", Frankreich);//30
+            Town Alsfeld = new Town("Alsfeld", "Kreuz", Frankreich);
+            
             //Fort(Zielstädte/Festungen)
             Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
 
@@ -35,19 +53,42 @@ namespace Fridolin
             Bingen.towns.add(Mainz, Boppard);
             Mainz.towns.add(Bingen, Wiesbaden, Oppenheim);
             Wiesbaden.towns.add(Mainz, Limburg, Frankfurt);
-            Limburg.towns.add(Wiesbaden, Koblenz);
-            Koblenz.towns.add(Boppard, Limburg);
             Boppard.towns.add(Koblenz, Bingen);
-            Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt);
-            Darmstadt.towns.add(Frankfurt, Bensheim);
-            Bensheim.towns.add(Darmstadt, Mannheim);
+            Koblenz.towns.add(Boppard, Limburg, Betzdorf);//5
+            Limburg.towns.add(Wiesbaden, Koblenz, Weilburg);
+            Oppenheim.towns.add(Mainz, Worms);
             Worms.towns.add(Oppenheim, Mannheim);
+            Mannheim.towns.add(Bensheim, Worms);
+            Bensheim.towns.add(Darmstadt, Mannheim);//10
+            Darmstadt.towns.add(Frankfurt, Bensheim, Aschaffenburg);
+            Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt, Homburg);
+            Hanau.towns.add(Frankfurt, Aschaffenburg);
+            Aschaffenburg.towns.add(Hanau, Darmstadt);
+            Weilburg.towns.add(Limburg, Wetzlar);//15
+            Wetzlar.towns.add(Weilburg, Wetzlar, Dillenburg);
+            Gießen.towns.add(Wetzlar, Nauheim, Marburg);
+            Nauheim.towns.add(Gießen, Homburg, Hanau);
+            Homburg.towns.add(Nauheim, Frankfurt);
+            Betzdorf.towns.add(Waldbröll, Siegen, Koblenz);//20
+            Waldbröll.towns.add(Olpe, Betzdorf);
+            Siegen.towns.add(Olpe, Biedenkopf, Dillenburg, Betzdorf);
+            Biedenkopf.towns.add(Siegen, Marburg);
+            Dillenburg.towns.add(Siegen, Marburg, Wetzlar);
+            Marburg.towns.add(Biedenkopf, Dillenburg, Gießen, Alsfeld, Frankenberg);//25
+            Alsfeld.towns.add(Marburg);
+            Frankenberg.towns.add(Corbach, Wildungen, Marburg);
+            Corbach.towns.add(Frankenberg);
+            Wildungen.towns.add(Frankenberg);
+            Meschede.towns.add(Olpe);//30
+            Olpe.towns.add(Meschede, Waldbröll, Siegen);
 
 
-
-            System.Console.WriteLine(Koblenz.towns.resultString());
-            System.Console.WriteLine(Wiesbaden.towns.resultString());
-            System.Console.WriteLine(Wiesbaden.reachDefense(5).resultString());
+            
+            //System.Console.WriteLine(Koblenz.towns.resultString());
+            //System.Console.WriteLine(Wiesbaden.towns.resultString());
+            System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
+            //System.Console.WriteLine(Wiesbaden.reachDefense(2).resultString());
+            //System.Console.WriteLine(Wiesbaden.reachDefense(1).resultString());
             System.Console.ReadKey();
 
 
@@ -146,8 +187,12 @@ namespace Fridolin
                   if (!result.search(a.data))
                   {
                       result.add(a.data);
+                  }
+                  if (distance > 1)
+                  {
                       a.data.reachDefense(distance - 1, result);
                   }
+                  
                  }while(a.next != null);
                 return result;
 
@@ -157,17 +202,23 @@ namespace Fridolin
 
         public void reachDefense(int distance, TownListing result) // methode bezüglich versorgung und abdeckung
         {
+            //Console.WriteLine(name+": reachDefense("+distance+", "+result.resultString()+")");
             if (distance > 0)
             {
                 TownListElement a = towns.head;
-                do
+                while (a.next != null)
                 {
                     a = a.next;
                     if (!result.search(a.data))
+                    {
                         result.add(a.data);
-                    reachDefense(distance - 1, result);
+                    }
+                    if (distance > 1)
+                    {
+                        a.data.reachDefense(distance - 1, result);
+                    }
 
-                } while (a.next != null);
+                }
             }    
 
         }
