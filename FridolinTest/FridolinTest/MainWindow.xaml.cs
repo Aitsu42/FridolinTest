@@ -36,8 +36,7 @@ namespace Friedrich
             Town Darmstadt = new Town("Darmstadt", "Kreuz", Frankreich);
             Town Frankfurt = new Town("Frankfurt", "Kreuz", Frankreich);
             Town Hanau = new Town("Hanau", "Kreuz", Hannover);
-
-            
+                        
             //Fort(Zielstädte/Festungen)
             Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
             
@@ -52,6 +51,7 @@ namespace Friedrich
             Darmstadt.towns.add(Frankfurt, Bensheim);
             Bensheim.towns.add(Darmstadt, Mannheim);
             Worms.towns.add(Oppenheim, Mannheim);
+
             System.Console.WriteLine("Hallo");
             System.Console.WriteLine(Koblenz.reachDefense(2).resultString());
 
