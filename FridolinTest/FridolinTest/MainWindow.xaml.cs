@@ -52,8 +52,8 @@ namespace Friedrich
             Darmstadt.towns.add(Frankfurt, Bensheim);
             Bensheim.towns.add(Darmstadt, Mannheim);
             Worms.towns.add(Oppenheim, Mannheim);
-
-            System.Console.WriteLine(Koblenz.reachDefense(2).ToString);
+            System.Console.WriteLine("Hallo");
+            System.Console.WriteLine(Koblenz.reachDefense(2).resultString());
 
         }
     }
@@ -276,9 +276,18 @@ namespace Friedrich
         {
             head = new TownListElement(null);
         }
-        public String ToString()
+        public String resultString()
         {
-            
+            String result = "";
+            TownListElement a = head.next;
+            for (int i = 0; i < number; i++)
+            {
+                result += a.data.name;
+                a = a.next;
+            }
+            return result;
+
+
         }
     } // ende: public class TownListing
 
