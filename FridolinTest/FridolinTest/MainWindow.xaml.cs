@@ -12,8 +12,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
+
+
+
+
 namespace Friedrich
 {
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            label1.content = (Koblenz.reachDefense(2).resultString());
+           
+        }
+    }
+
     public class Test
     {
         public void main(String[] args) //kleine Test, zum debuggen ;)
@@ -52,8 +71,10 @@ namespace Friedrich
             Bensheim.towns.add(Darmstadt, Mannheim);
             Worms.towns.add(Oppenheim, Mannheim);
 
+
+
             System.Console.WriteLine("Hallo");
-            System.Console.WriteLine(Koblenz.reachDefense(2).resultString());
+
 
         }
     }
