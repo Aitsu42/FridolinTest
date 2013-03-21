@@ -14,6 +14,35 @@ using System.Windows.Shapes;
 
 namespace Friedrich
 {
+    public class Test
+    {
+        public void main(String[] args) //kleine Test, zum debuggen ;)
+        {
+            //Nationen
+            Nation Frankreich = new Nation();
+            Nation Hannover = new Nation();
+            //Städte
+            Town Bingen = new Town("Bingen", "Herz", Frankreich);
+            Town Mainz = new Town("Mainz", "Herz", Frankreich);
+            Town Wiesbaden = new Town("Wiesbaden", "Herz", Frankreich);
+            Town Boppard = new Town("Boppard", "Herz", Frankreich);
+            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
+            Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
+            //Fort(Zielstädte)
+            Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
+            //Nachbarstädte
+            Bingen.towns.add(Mainz, Boppard);
+            Mainz.towns.add(Bingen, Wiesbaden);
+            Wiesbaden.towns.add(Mainz, Limburg);
+            Limburg.towns.add(Wiesbaden, Koblenz);
+            Koblenz.towns.add(Boppard, Limburg);
+            Boppard.towns.add(Koblenz, Bingen);
+
+            System.Console.WriteLine(Koblenz.reachDefense(2).ToString);
+
+        }
+    }
+
     /*public partial class MainWindow : Window
     {
         public MainWindow()
@@ -34,27 +63,7 @@ namespace Friedrich
 
         public void move()
         { }
-        public void main(String[] args) //kleine Test, zum debuggen ;)
-        {
-            Nation Frankreich = new Nation();
-            Nation Hannover = new Nation();
-            Town Bingen = new Town("Bingen", "Herz", Frankreich);
-            Town Mainz = new Town("Mainz", "Herz", Frankreich);
-            Town Wiesbaden = new Town("Wiesbaden", "Herz", Frankreich);
-            Town Boppard = new Town("Boppard", "Herz", Frankreich);
-            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
-            Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
-
-            Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
-
-            Bingen.towns.add(Mainz, Boppard);
-            Mainz.towns.add(Bingen, Wiesbaden);
-            Wiesbaden.towns.add(Mainz, Limburg);
-            Limburg.towns.add(Wiesbaden, Koblenz);
-            Koblenz.towns.add(Boppard, Limburg);
-            Boppard.towns.add(Koblenz, Bingen);
-
-        }
+        
     }
 
     public class General : Character
@@ -240,6 +249,9 @@ namespace Friedrich
         {
             head = new TownListElement(null);
         }
+        public String ToString()
+        {
+            String result =
     }
     public class Listing
     {
