@@ -21,6 +21,7 @@ namespace Friedrich
             //Nationen
             Nation Frankreich = new Nation();
             Nation Hannover = new Nation();
+
             //Städte
             Town Bingen = new Town("Bingen", "Herz", Frankreich);
             Town Mainz = new Town("Mainz", "Herz", Frankreich);
@@ -28,17 +29,29 @@ namespace Friedrich
             Town Boppard = new Town("Boppard", "Herz", Frankreich);
             Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);
             Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
+            Town Oppenheim = new Town("Oppenheim", "Kreuz", Frankreich);
+            Town Worms = new Town("Worms", "Kreuz", Frankreich);
+            Town Mannheim = new Town("Mannheim", "Kreuz", Frankreich);
+            Town Bensheim = new Town("Bensheim", "Kreuz", Frankreich);
+            Town Darmstadt = new Town("Darmstadt", "Kreuz", Frankreich);
+            Town Frankfurt = new Town("Frankfurt", "Kreuz", Frankreich);
+            Town Hanau = new Town("Hanau", "Kreuz", Hannover);
+
             
             //Fort(Zielstädte/Festungen)
             Town Kassel = new Fort("Kassel", "Pik", Hannover, Frankreich); // Für Festungen
             
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
-            Mainz.towns.add(Bingen, Wiesbaden);
-            Wiesbaden.towns.add(Mainz, Limburg);
+            Mainz.towns.add(Bingen, Wiesbaden, Oppenheim);
+            Wiesbaden.towns.add(Mainz, Limburg, Frankfurt);
             Limburg.towns.add(Wiesbaden, Koblenz);
             Koblenz.towns.add(Boppard, Limburg);
             Boppard.towns.add(Koblenz, Bingen);
+            Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt);
+            Darmstadt.towns.add(Frankfurt, Bensheim);
+            Bensheim.towns.add(Darmstadt, Mannheim);
+            Worms.towns.add(Oppenheim, Mannheim);
 
             System.Console.WriteLine(Koblenz.reachDefense(2).ToString);
 
