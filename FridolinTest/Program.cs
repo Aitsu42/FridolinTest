@@ -26,6 +26,8 @@ namespace Fridolin
             
             //Städte
 
+            // 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz !
+
             Town lx = new Town("Lücke", 0, Schweden); //Lückenfüller 
 
             Town Bingen = new Town("Bingen", 3, Frankreich);
@@ -149,6 +151,8 @@ namespace Fridolin
             System.Console.WriteLine(Preußen.generals.resultString());
             System.Console.WriteLine(Schweden.generals.resultString());
             System.Console.WriteLine(Schweden.allies.resultString());
+            System.Console.WriteLine(Fulda.towns.resultString());
+
             System.Console.ReadKey();
         }
     }
@@ -209,7 +213,7 @@ namespace Fridolin
         public int id;
         public int tacticalColor;
         public Nation nation;
-        public TownListing towns;
+        public Listing towns;
         public Listing inTown;
 
         public Town(String newName, int newTacticalColor, Nation newNation)
@@ -219,16 +223,18 @@ namespace Fridolin
             name = newName;
             tacticalColor = newTacticalColor;
             nation = newNation;
-            towns = new TownListing();
+            towns = new Listing();
             inTown = new Listing();
         }
     
-         public TownListing reachDefense(int distance) // Startmethode
+         public Listing reachDefense(int distance) // Startmethode
          {
-            TownListing result = new TownListing();
+             Town tow;
+             
+             Listing result = new Listing();
             if (distance > 0)
             {
-                TownListElement a = towns.head;
+                ListElement a = towns.head;
                 do
                 {
                   a = a.next;
@@ -238,7 +244,11 @@ namespace Fridolin
                   }
                   if (distance > 1)
                   {
-                      a.data.reachDefense(distance - 1, result);
+                      if (a.data.GetType() == typeof(Town))
+                      {
+                          tow = (Town)a.data;
+                          a.data.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha
+                      }
                   }
                   
                  }while(a.next != null);
@@ -248,12 +258,12 @@ namespace Fridolin
             return result;
            }
 
-        public void reachDefense(int distance, TownListing result) // methode bezüglich versorgung und abdeckung
+        public void reachDefense(int distance, Listing result) // methode bezüglich versorgung und abdeckung
         {
             //Console.WriteLine(name+": reachDefense("+distance+", "+result.resultString()+")");
             if (distance > 0)
             {
-                TownListElement a = towns.head;
+                ListElement a = towns.head;
                 while (a.next != null)
                 {
                     a = a.next;
@@ -263,7 +273,7 @@ namespace Fridolin
                     }
                     if (distance > 1)
                     {
-                        a.data.reachDefense(distance - 1, result);
+                        a.data.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha
                     }
 
                 }
@@ -314,34 +324,35 @@ namespace Fridolin
         public int value;
     }
 
-    public class TownListing
+ 
+    public class Listing
     {
-        public TownListElement head;
+        public ListElement head;
         public int number = 0;
 
-        public void add(Town newObject)
+        public void add(Object newObject1)
         {
-            TownListElement newElement = new TownListElement(newObject);
+            ListElement newElement = new ListElement(newObject1);
             newElement.next = head.next;
             head.next = newElement;
             number++; //erhöhe Listenanzahl
         }
 
-        public void add(Town newObject1, Town newObject2)
+        public void add(Object newObject1, Object newObject2)
         {
-            TownListElement newElement1 = new TownListElement(newObject1);
-            TownListElement newElement2 = new TownListElement(newObject2);
+            ListElement newElement1 = new ListElement(newObject1);
+            ListElement newElement2 = new ListElement(newObject2);
             newElement1.next = head.next;
             newElement2.next = newElement1;
             head.next = newElement2;
             number += 2; //erhöhe Listenanzahl
         }
 
-        public void add(Town newObject1, Town newObject2, Town newObject3)
+        public void add(Object newObject1, Object newObject2, Object newObject3)
         {
-            TownListElement newElement1 = new TownListElement(newObject1);
-            TownListElement newElement2 = new TownListElement(newObject2);
-            TownListElement newElement3 = new TownListElement(newObject3);
+            ListElement newElement1 = new ListElement(newObject1);
+            ListElement newElement2 = new ListElement(newObject2);
+            ListElement newElement3 = new ListElement(newObject3);
             newElement1.next = head.next;
             newElement2.next = newElement1;
             newElement3.next = newElement2;
@@ -349,12 +360,12 @@ namespace Fridolin
             number += 3; //erhöhe Listenanzahl
         }
 
-        public void add(Town newObject1, Town newObject2, Town newObject3, Town newObject4)
+        public void add(Object newObject1, Object newObject2, Object newObject3, Object newObject4)
         {
-            TownListElement newElement1 = new TownListElement(newObject1);
-            TownListElement newElement2 = new TownListElement(newObject2);
-            TownListElement newElement3 = new TownListElement(newObject3);
-            TownListElement newElement4 = new TownListElement(newObject4);
+            ListElement newElement1 = new ListElement(newObject1);
+            ListElement newElement2 = new ListElement(newObject2);
+            ListElement newElement3 = new ListElement(newObject3);
+            ListElement newElement4 = new ListElement(newObject4);
             newElement1.next = head.next;
             newElement2.next = newElement1;
             newElement3.next = newElement2;
@@ -363,13 +374,13 @@ namespace Fridolin
             number += 4; //erhöhe Listenanzahl
         }
 
-        public void add(Town newObject1, Town newObject2, Town newObject3, Town newObject4, Town newObject5)
+        public void add(Object newObject1, Object newObject2, Object newObject3, Object newObject4, Object newObject5)
         {
-            TownListElement newElement1 = new TownListElement(newObject1);
-            TownListElement newElement2 = new TownListElement(newObject2);
-            TownListElement newElement3 = new TownListElement(newObject3);
-            TownListElement newElement4 = new TownListElement(newObject4);
-            TownListElement newElement5 = new TownListElement(newObject5);
+            ListElement newElement1 = new ListElement(newObject1);
+            ListElement newElement2 = new ListElement(newObject2);
+            ListElement newElement3 = new ListElement(newObject3);
+            ListElement newElement4 = new ListElement(newObject4);
+            ListElement newElement5 = new ListElement(newObject5);
             newElement1.next = head.next;
             newElement2.next = newElement1;
             newElement3.next = newElement2;
@@ -377,52 +388,6 @@ namespace Fridolin
             newElement5.next = newElement4;
             head.next = newElement5;
             number += 5; //erhöhe Listenanzahl
-        }
-
-        public bool search(Town toFind) //das fragt die liste ob das einzutragende schon in der liste ist
-        {
-            return head.find(toFind);
-        }
-
-        public void remove(Town toRemove) //Methode zum löschen eines Objektes aus einer Liste
-        {
-            if (head.rm(toRemove)) //Start am Kopf
-            {
-                number--; //verringere Listenanzahl
-            }
-        }
-
-        public TownListing()
-        {
-            head = new TownListElement(null);
-        }
-
-        public String resultString()
-        {
-            String result = "";
-            TownListElement a = head.next;
-            for (int i = 0; i < number; i++)
-            {
-                result += ", "+i+". "+a.data.name;
-                a = a.next;
-            }
-            if (result == "")
-                result = "leer";
-            return result;
-        }
-    } // ende: public class TownListing
-
-    public class Listing
-    {
-        public ListElement head;
-        public int number = 0;
-
-        public void add(Object newObject)
-        {
-            ListElement newElement = new ListElement(newObject);
-            newElement.next = head.next;
-            head.next = newElement;
-            number++; //erhöhe Listenanzahl
         }
 
         public bool search(Object toFind) //das fragt die liste ob das einzutragende schon in der liste ist
@@ -448,21 +413,39 @@ namespace Fridolin
         {
             String result = "";
             ListElement a = head.next;
+            Town tow;
             General gen;
             Nation nat;
             Baggage bag;
             Card car;
             for (int i = 1; i < number+1; i++)
             {
+                if (a.data.GetType() == typeof(Town))
+                {
+                    tow = (Town)a.data;
+                    if (i == 1)
+                    {
+                        result += "Städte: ";
+                    }
+                    result += i + ". " + tow.name + ", ";
+                }
                 if (a.data.GetType() == typeof(General))
                 {
                     gen = (General)a.data;
-                    result +=  i + ". General: " + gen.name + ", ";
+                    if (i == 1)
+                    {
+                        result += "Generäle von " + gen.nation.name + ": ";
+                    }
+                    result += i + ". " + gen.name + ", ";
                 }
                 if (a.data.GetType() == typeof(Nation))
                 {
                     nat = (Nation)a.data;
-                    result += "Nation: " + i + ". " + nat.name + ", " ;
+                    if (i == 1)
+                    {
+                        result += "Verbündete: ";
+                    }
+                    result += i + ". " + nat.name + ", " ;
                 }
                 if (a.data.GetType() == typeof(Baggage))
                 {
@@ -524,47 +507,6 @@ namespace Fridolin
             return next.find(toFind);
         }
     }
-
-    public class TownListElement
-    {
-        public TownListElement next;
-        public Town data;
-        public TownListElement(Town newTown)
-        {
-            data = newTown;
-        }
-
-        public bool rm(Town toRemove)
-        {
-            if (next.data == toRemove) //falls der Inhalt des nächsten Objekt das löschende ist
-            {
-                next = next.next; //überspringe dieses Objekt
-                return true;
-            }
-
-            if (next.next == null) //falls das Ende der Liste, dann beende
-            {
-               return false;
-            }
-            return next.rm(toRemove); //Rufe das nächste Objekt auf
-        }
-
-        public bool find(Town toFind)
-        {
-            if (data == toFind)
-            {
-                return true;
-            }
-
-            if (next == null)
-            {
-                return false;
-            }
-
-            return next.find(toFind);
-        }
-    } // Ende public class TownListElement
-
 
 
 }
