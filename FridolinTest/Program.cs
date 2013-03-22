@@ -10,8 +10,8 @@ namespace Fridolin
         static void Main(string[] args)
         {
             //Nationen
-            Nation Frankreich = new Nation(20);
-            Nation Hannover = new Nation(12);
+            Nation Frankreich = new Nation("Frankreich",20);
+            Nation Hannover = new Nation("Hannover",12);
 
             
             //Städte
@@ -121,7 +121,8 @@ namespace Fridolin
             //System.Console.ReadKey();
 
 
-            System.Console.WriteLine("guck guck");
+            System.Console.WriteLine(Frankreich.generals.resultString());
+            System.Console.WriteLine(Hannover.generals.resultString());
             System.Console.ReadKey();
         }
     }
@@ -258,6 +259,7 @@ namespace Fridolin
 
     public class Nation
     {
+        public String name;
         public Listing generals;
         public Listing forts;
         public Listing cards;
@@ -265,9 +267,14 @@ namespace Fridolin
         public Listing allies;
         public int maxArmies;
 
-        public Nation(int newMaxArmy)
+        public Nation(String newName, int newMaxArmy)
         {
             generals = new Listing();
+            forts = new Listing();
+            cards = new Listing();
+            startTowns = new Listing();
+            allies = new Listing();
+            name = newName;
 
         }
     }
@@ -410,15 +417,35 @@ namespace Fridolin
         }
 
 
-     /*   public String resultString()
+        public String resultString() //debugMethode, um Listen auszugeben
         {
             String result = "";
             ListElement a = head.next;
+            General b;
+            Nation c;
+            Baggage d;
+            Card e;
             for (int i = 0; i < number; i++)
             {
-                try
+                if (a.data.GetType() == typeof(General))
                 {
-                    result += ", " + i + ". " + a.data.name;
+                    b = (General)a.data;
+                    result += ", " + i + ". " + b.name;
+                }
+                if (a.data.GetType() == typeof(Nation))
+                {
+                    c = (Nation)a.data;
+                    result += ", " + i + ". " + c.name;
+                }
+                if (a.data.GetType() == typeof(Baggage))
+                {
+                    d = (Baggage)a.data;
+                    result += ", " + i+1 + ". Tross";
+                }
+                if (a.data.GetType() == typeof(Card))
+                {
+                    e = (Card)a.data;
+                    result += ", " + i + ". " + e.value;
                 }
                 a = a.next;
             }
@@ -426,7 +453,7 @@ namespace Fridolin
                 result = "leer";
             return result;
         }
-        */
+        
 
    }
 
