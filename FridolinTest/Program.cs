@@ -16,6 +16,13 @@ namespace Fridolin
             Nation Schweden = new Nation("Schweden", 4, 1);
 
 
+            //Liste Allies
+            Hannover.allies.add(Preußen);
+            Preußen.allies.add(Hannover);
+            Frankreich.allies.add(Schweden); //für special szenario
+            Schweden.allies.add(Frankreich); //für special szenario
+
+
             
             //Städte
 
@@ -65,12 +72,12 @@ namespace Fridolin
             Town Hünfeld = new Town("Hünfeld", 2, Frankreich);
             Town Lohr = new Town("Lohr", 5, Frankreich);
             Town Lauterbach = new Town("Lauterbach", 2, Frankreich);
-
-
+            
 
             //Fort(Zielstädte/Festungen)
             Fort Kassel = new Fort("Kassel", 2, Hannover, Frankreich);
             Fort Göttingen = new Fort("Göttingen", 5, Hannover, Frankreich);
+
 
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
@@ -120,16 +127,14 @@ namespace Fridolin
             Erbach.towns.add(Bensheim, Miltenberg);//45
             Miltenberg.towns.add(Erbach, lx);
 
-
-
+            
             General Cumberland = new General("Cumberland", Alfeld, Hannover); 
 
-            General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
-            General Soubise = new General("Soubise", Fulda, Frankreich);
             General Chevert = new General("Chevert", Iserlohn, Frankreich);
-
-
-
+            General Soubise = new General("Soubise", Fulda, Frankreich);
+            General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
+            
+            
 
             //System.Console.WriteLine(Koblenz.towns.resultString());
             //System.Console.WriteLine(Wiesbaden.towns.resultString());
@@ -143,6 +148,7 @@ namespace Fridolin
             System.Console.WriteLine(Hannover.generals.resultString());
             System.Console.WriteLine(Preußen.generals.resultString());
             System.Console.WriteLine(Schweden.generals.resultString());
+            System.Console.WriteLine(Schweden.allies.resultString());
             System.Console.ReadKey();
         }
     }
@@ -442,31 +448,31 @@ namespace Fridolin
         {
             String result = "";
             ListElement a = head.next;
-            General b;
-            Nation c;
-            Baggage d;
-            Card e;
-            for (int i = 0; i < number; i++)
+            General gen;
+            Nation nat;
+            Baggage bag;
+            Card car;
+            for (int i = 1; i < number+1; i++)
             {
                 if (a.data.GetType() == typeof(General))
                 {
-                    b = (General)a.data;
-                    result += ", " + i + ". " + b.name;
+                    gen = (General)a.data;
+                    result +=  i + ". General: " + gen.name + ", ";
                 }
                 if (a.data.GetType() == typeof(Nation))
                 {
-                    c = (Nation)a.data;
-                    result += ", " + i + ". " + c.name;
+                    nat = (Nation)a.data;
+                    result += "Nation: " + i + ". " + nat.name + ", " ;
                 }
                 if (a.data.GetType() == typeof(Baggage))
                 {
-                    d = (Baggage)a.data;
-                    result += ", " + i+1 + ". Tross";
+                    bag = (Baggage)a.data;
+                    result += i + ". Tross" + ", ";
                 }
                 if (a.data.GetType() == typeof(Card))
                 {
-                    e = (Card)a.data;
-                    result += ", " + i + ". " + e.value;
+                    car = (Card)a.data;
+                    result += i + ". " + car.value + ", ";
                 }
                 a = a.next;
             }
