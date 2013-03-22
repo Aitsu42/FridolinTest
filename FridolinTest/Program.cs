@@ -10,54 +10,67 @@ namespace Fridolin
         static void Main(string[] args)
         {
             //Nationen
-            Nation Frankreich = new Nation("Frankreich",20);
-            Nation Hannover = new Nation("Hannover",12);
+            Nation Frankreich = new Nation("Frankreich", 20, 3); //Karte 4 auswählen noch basteln!
+            Nation Hannover = new Nation("Hannover",12, 2);
+            Nation Preußen = new Nation("Preußen", 32, 7);
+            Nation Schweden = new Nation("Schweden", 4, 1);
+
 
             
             //Städte
-            Town Bingen = new Town("Bingen", "Herz", Frankreich);
-            Town Mainz = new Town("Mainz", "Herz", Frankreich);
-            Town Wiesbaden = new Town("Wiesbaden", "Herz", Frankreich);
-            Town Boppard = new Town("Boppard", "Herz", Frankreich);
-            Town Koblenz = new Town("Koblenz", "Kreuz", Frankreich);//5
-            Town Limburg = new Town("Limburg", "Kreuz", Frankreich);
-            Town Oppenheim = new Town("Oppenheim", "Herz", Frankreich);
-            Town Worms = new Town("Worms", "Herz", Frankreich);
-            Town Mannheim = new Town("Mannheim", "Herz", Frankreich);
-            Town Bensheim = new Town("Bensheim", "Herz", Frankreich);//10
-            Town Darmstadt = new Town("Darmstadt", "Herz", Frankreich);
-            Town Frankfurt = new Town("Frankfurt", "Herz", Frankreich);
-            Town Hanau = new Town("Hanau", "Herz", Hannover);
-            Town Aschaffenburg = new Town("Aschaffenburg", "Herz", Frankreich);
-            Town Weilburg = new Town("Weilburg", "Kreuz", Frankreich);//15
-            Town Wetzlar = new Town("Wetzlar", "Kreuz", Frankreich);
-            Town Gießen = new Town("Gießen", "Kreuz", Frankreich);
-            Town Nauheim = new Town("Nauheim", "Kreuz", Frankreich);
-            Town Homburg = new Town("Homburg", "Kreuz", Frankreich);
-            Town Betzdorf = new Town("Betzdorf", "Kreuz", Frankreich);//20
-            Town Waldbröll = new Town("Waldbröll", "Kreuz", Frankreich);
-            Town Olpe = new Town("Olpe", "Kreuz", Frankreich);
-            Town Meschede = new Town("Meschede", "Kreuz", Frankreich);
-            Town Siegen = new Town("Siegen", "Kreuz", Frankreich);
-            Town Biedenkopf = new Town("Biedenkopf", "Kreuz", Frankreich);//25
-            Town Dillenburg = new Town("Dillenburg", "Kreuz", Frankreich);
-            Town Marburg = new Town("Marburg", "Kreuz", Frankreich);
-            Town Frankenberg = new Town("Frankenberg", "Kreuz", Frankreich);
-            Town Corbach = new Town("Corbach", "Kreuz", Frankreich);
-            Town Wildungen = new Town("Wildungen", "Kreuz", Frankreich);//30
-            Town Alsfeld = new Town("Alsfeld", "Kreuz", Frankreich);
-            Town Iserlohn = new Town("Iserlohn", "Herz", Frankreich);
-            Town Fulda = new Town("Fulda", "Karo", Frankreich);
-            Town Schlüchtern = new Town("Schlüchtern", "Karo", Hannover);
-            Town Gelnhausen = new Town("Gelnhausen", "Herz", Frankreich);//35
-            Town Alfeld = new Town("Alfeld", "Pik", Hannover);
-            Town Northeim = new Town("Northeim", "Pik", Hannover);         
-            Town Münden = new Town("Münden", "Pik", Hannover);
-            Town Fritzlar = new Town("Fritzlar", "Karo", Hannover);
+
+            Town lx = new Town("Lücke", 0, Schweden); //Lückenfüller 
+
+            Town Bingen = new Town("Bingen", 3, Frankreich);
+            Town Mainz = new Town("Mainz", 3, Frankreich);
+            Town Wiesbaden = new Town("Wiesbaden", 3, Frankreich);
+            Town Boppard = new Town("Boppard", 3, Frankreich);
+            Town Koblenz = new Town("Koblenz", 7, Frankreich);//5
+            Town Limburg = new Town("Limburg", 7, Frankreich);
+            Town Oppenheim = new Town("Oppenheim", 3, Frankreich);
+            Town Worms = new Town("Worms", 3, Frankreich);
+            Town Mannheim = new Town("Mannheim", 3, Frankreich);
+            Town Bensheim = new Town("Bensheim", 3, Frankreich);//10
+            Town Darmstadt = new Town("Darmstadt", 3, Frankreich);
+            Town Frankfurt = new Town("Frankfurt", 3, Frankreich);
+            Town Hanau = new Town("Hanau", 3, Hannover);
+            Town Aschaffenburg = new Town("Aschaffenburg", 3, Frankreich);
+            Town Weilburg = new Town("Weilburg", 7, Frankreich);//15
+            Town Wetzlar = new Town("Wetzlar", 7, Frankreich);
+            Town Gießen = new Town("Gießen", 7, Frankreich);
+            Town Nauheim = new Town("Nauheim", 7, Frankreich);
+            Town Homburg = new Town("Homburg", 7, Frankreich);
+            Town Betzdorf = new Town("Betzdorf", 7, Frankreich);//20
+            Town Waldbröll = new Town("Waldbröll", 7, Frankreich);
+            Town Olpe = new Town("Olpe", 7, Frankreich);
+            Town Meschede = new Town("Meschede", 7, Frankreich);
+            Town Siegen = new Town("Siegen", 7, Frankreich);
+            Town Biedenkopf = new Town("Biedenkopf", 7, Frankreich);//25
+            Town Dillenburg = new Town("Dillenburg", 7, Frankreich);
+            Town Marburg = new Town("Marburg", 7, Frankreich);
+            Town Frankenberg = new Town("Frankenberg", 7, Frankreich);
+            Town Corbach = new Town("Corbach", 7, Frankreich);
+            Town Wildungen = new Town("Wildungen", 7, Frankreich);//30
+            Town Alsfeld = new Town("Alsfeld", 7, Frankreich);
+            Town Iserlohn = new Town("Iserlohn", 3, Frankreich);
+            Town Fulda = new Town("Fulda", 2, Frankreich);
+            Town Schlüchtern = new Town("Schlüchtern", 2, Hannover);
+            Town Gelnhausen = new Town("Gelnhausen", 3, Frankreich);//35
+            Town Alfeld = new Town("Alfeld", 5, Hannover);
+            Town Northeim = new Town("Northeim", 5, Hannover);         
+            Town Münden = new Town("Münden", 5, Hannover);
+            Town Fritzlar = new Town("Fritzlar", 2, Hannover);
+            Town Erbach = new Town("Erbach", 3, Frankreich);//40
+            Town Miltenberg = new Town("Miltenberg", 3, Frankreich);
+            Town Hünfeld = new Town("Hünfeld", 2, Frankreich);
+            Town Lohr = new Town("Lohr", 5, Frankreich);
+            Town Lauterbach = new Town("Lauterbach", 2, Frankreich);
+
+
 
             //Fort(Zielstädte/Festungen)
-            Town Kassel = new Fort("Kassel", "Karo", Hannover, Frankreich); // Für Festungen
-            Fort Göttingen = new Fort("Göttingen", "Pik", Hannover, Frankreich);
+            Fort Kassel = new Fort("Kassel", 2, Hannover, Frankreich);
+            Fort Göttingen = new Fort("Göttingen", 5, Hannover, Frankreich);
 
             //Nachbarstädte
             Bingen.towns.add(Mainz, Boppard);
@@ -69,14 +82,14 @@ namespace Fridolin
             Oppenheim.towns.add(Mainz, Worms);
             Worms.towns.add(Oppenheim, Mannheim);
             Mannheim.towns.add(Bensheim, Worms);
-            Bensheim.towns.add(Darmstadt, Mannheim);//10
+            Bensheim.towns.add(Darmstadt, Mannheim, Erbach);//10
             Darmstadt.towns.add(Frankfurt, Bensheim, Aschaffenburg);
             Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt, Homburg);
-            Hanau.towns.add(Frankfurt, Aschaffenburg);
-            Aschaffenburg.towns.add(Hanau, Darmstadt);
+            Hanau.towns.add(Frankfurt, Aschaffenburg, Gelnhausen, Nauheim);
+            Aschaffenburg.towns.add(Hanau, Darmstadt, Lohr, Miltenberg); //HIER
             Weilburg.towns.add(Limburg, Wetzlar);//15
             Wetzlar.towns.add(Weilburg, Wetzlar, Dillenburg);
-            Gießen.towns.add(Wetzlar, Nauheim, Marburg);
+            Gießen.towns.add(Wetzlar, Nauheim, Marburg, Lauterbach);
             Nauheim.towns.add(Gießen, Homburg, Hanau);
             Homburg.towns.add(Nauheim, Frankfurt);
             Betzdorf.towns.add(Waldbröll, Siegen, Koblenz);//20
@@ -85,22 +98,27 @@ namespace Fridolin
             Biedenkopf.towns.add(Siegen, Marburg);
             Dillenburg.towns.add(Siegen, Marburg, Wetzlar);
             Marburg.towns.add(Biedenkopf, Dillenburg, Gießen, Alsfeld, Frankenberg);//25
-            Alsfeld.towns.add(Marburg, Fritzlar);
+            Alsfeld.towns.add(Marburg, Fritzlar, Hünfeld, Lauterbach);
             Frankenberg.towns.add(Corbach, Wildungen, Marburg);
-            Corbach.towns.add(Frankenberg);
-            Wildungen.towns.add(Frankenberg);
-            Meschede.towns.add(Olpe);//30
-            Olpe.towns.add(Meschede, Waldbröll, Siegen);
-            Iserlohn.towns.add(Olpe);
-            Fulda.towns.add(Schlüchtern);
-            Schlüchtern.towns.add(Gelnhausen, Fulda);
+            Corbach.towns.add(Frankenberg, lx, lx);
+            Wildungen.towns.add(Frankenberg, Fritzlar);
+            Meschede.towns.add(Olpe, lx);//30
+            Olpe.towns.add(Meschede, Waldbröll, Siegen, Iserlohn);
+            Iserlohn.towns.add(Olpe, lx);
+            Fulda.towns.add(Schlüchtern, Lauterbach, Hünfeld, lx);
+            Schlüchtern.towns.add(Gelnhausen, Fulda, lx);
             Gelnhausen.towns.add(Schlüchtern, Hanau);//35
-            Alfeld.towns.add(Northeim);
-            Northeim.towns.add(Alfeld, Göttingen);
-            Göttingen.towns.add(Alfeld);
-            Fritzlar.towns.add(Alsfeld, Kassel);
-            Kassel.towns.add(Fritzlar, Münden);//40
+            Alfeld.towns.add(Northeim, lx, lx);
+            Northeim.towns.add(Alfeld, Göttingen, lx, lx);
+            Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
+            Fritzlar.towns.add(Alsfeld, Kassel, Wildungen);
+            Kassel.towns.add(Fritzlar, Münden, lx, lx);//40
             Münden.towns.add(Kassel, Göttingen);
+            Lauterbach.towns.add(Fulda, Gießen, Alsfeld);
+            Lohr.towns.add(Aschaffenburg, lx);
+            Hünfeld.towns.add(Fulda, Alsfeld, lx, lx);
+            Erbach.towns.add(Bensheim, Miltenberg);//45
+            Miltenberg.towns.add(Erbach, lx);
 
 
 
@@ -123,6 +141,8 @@ namespace Fridolin
 
             System.Console.WriteLine(Frankreich.generals.resultString());
             System.Console.WriteLine(Hannover.generals.resultString());
+            System.Console.WriteLine(Preußen.generals.resultString());
+            System.Console.WriteLine(Schweden.generals.resultString());
             System.Console.ReadKey();
         }
     }
@@ -181,12 +201,12 @@ namespace Fridolin
         public String name;
         public static int counter = 0;
         public int id;
-        public String tacticalColor;
+        public int tacticalColor;
         public Nation nation;
         public TownListing towns;
         public Listing inTown;
 
-        public Town(String newName, String newTacticalColor, Nation newNation)
+        public Town(String newName, int newTacticalColor, Nation newNation)
         {
             id = counter;
             counter++;
@@ -250,7 +270,7 @@ namespace Fridolin
     {
         public Nation conquerNation;
         public bool conquered=false;
-        public Fort(String newName, String newTacticalColor, Nation newNation, Nation newConquerNation):base(newName, newTacticalColor, newNation)
+        public Fort(String newName, int newTacticalColor, Nation newNation, Nation newConquerNation):base(newName, newTacticalColor, newNation)
         {
             conquerNation = newConquerNation;
         }
@@ -266,8 +286,9 @@ namespace Fridolin
         public Listing startTowns;
         public Listing allies;
         public int maxArmies;
+        public int cardsPerRound;
 
-        public Nation(String newName, int newMaxArmy)
+        public Nation(String newName, int newMaxArmy, int cardsPerRound)
         {
             generals = new Listing();
             forts = new Listing();
