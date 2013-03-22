@@ -86,7 +86,7 @@ namespace Fridolin
             Darmstadt.towns.add(Frankfurt, Bensheim, Aschaffenburg);
             Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt, Homburg);
             Hanau.towns.add(Frankfurt, Aschaffenburg, Gelnhausen, Nauheim);
-            Aschaffenburg.towns.add(Hanau, Darmstadt, Lohr, Miltenberg); //HIER
+            Aschaffenburg.towns.add(Hanau, Darmstadt, Lohr, Miltenberg);
             Weilburg.towns.add(Limburg, Wetzlar);//15
             Wetzlar.towns.add(Weilburg, Wetzlar, Dillenburg);
             Gießen.towns.add(Wetzlar, Nauheim, Marburg, Lauterbach);
@@ -373,7 +373,6 @@ namespace Fridolin
             number += 5; //erhöhe Listenanzahl
         }
 
-
         public bool search(Town toFind) //das fragt die liste ob das einzutragende schon in der liste ist
         {
             return head.find(toFind);
@@ -391,6 +390,7 @@ namespace Fridolin
         {
             head = new TownListElement(null);
         }
+
         public String resultString()
         {
             String result = "";
