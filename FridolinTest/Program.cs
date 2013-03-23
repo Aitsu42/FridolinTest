@@ -26,109 +26,160 @@ namespace Fridolin
             
             //Städte
 
-            // 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz !
+            // 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz
 
             Town lx = new Town("Lücke", 0, Schweden); //Lückenfüller 
 
+            //sortiert nach Gebieten
+
+            //3.1 - Herz(Fr+Ha) von Boppard bis Miltenberg (15) - ready
             Town Bingen = new Town("Bingen", 3, Frankreich);
             Town Mainz = new Town("Mainz", 3, Frankreich);
             Town Wiesbaden = new Town("Wiesbaden", 3, Frankreich);
             Town Boppard = new Town("Boppard", 3, Frankreich);
-            Town Koblenz = new Town("Koblenz", 7, Frankreich);//5
-            Town Limburg = new Town("Limburg", 7, Frankreich);
             Town Oppenheim = new Town("Oppenheim", 3, Frankreich);
             Town Worms = new Town("Worms", 3, Frankreich);
             Town Mannheim = new Town("Mannheim", 3, Frankreich);
-            Town Bensheim = new Town("Bensheim", 3, Frankreich);//10
+            Town Bensheim = new Town("Bensheim", 3, Frankreich);
             Town Darmstadt = new Town("Darmstadt", 3, Frankreich);
             Town Frankfurt = new Town("Frankfurt", 3, Frankreich);
             Town Hanau = new Town("Hanau", 3, Hannover);
             Town Aschaffenburg = new Town("Aschaffenburg", 3, Frankreich);
-            Town Weilburg = new Town("Weilburg", 7, Frankreich);//15
+            Town Gelnhausen = new Town("Gelnhausen", 3, Frankreich);
+            Town Erbach = new Town("Erbach", 3, Frankreich);
+            Town Miltenberg = new Town("Miltenberg", 3, Frankreich);
+
+            //5.1 - Pik(Fr) Gemünden bis Erlangen (14) - ready
+            Town Lohr = new Town("Lohr", 5, Frankreich);
+            Town Wertheim = new Town("Wertheim", 5, Frankreich);
+            Town Ochsenfurt = new Town("Ochsenfurt", 5, Frankreich);
+            Town Kitzingen = new Town("Kitzingen", 5, Frankreich);
+            Town Neustadt = new Town("Neustadt", 5, Frankreich);
+            Town Erlangen = new Town("Erlangen", 5, Frankreich);
+            Town Forchheim = new Town("Forchheim", 5, Frankreich);
+            Town Bamberg = new Town("Bamberg", 5, Frankreich);
+            Town Coburg = new Town("Coburg", 5, Frankreich);
+            Town Haßfurt = new Town("Haßfurt", 5, Frankreich);
+            Town Schweinfurt = new Town("Schweinfurt", 5, Frankreich);
+            Town Kissingen = new Town("Kissingen", 5, Frankreich);
+            Town Gemünden = new Town("Gemünden", 5, Frankreich);
+            Town Würzburg = new Town("Würzburg", 5, Frankreich);
+            
+            //7.1 - Kreuz(Fr+Ha) von Olpe bis Nauheim (19) - ready
+            Town Koblenz = new Town("Koblenz", 7, Frankreich);
+            Town Limburg = new Town("Limburg", 7, Frankreich);
+            Town Weilburg = new Town("Weilburg", 7, Frankreich);
             Town Wetzlar = new Town("Wetzlar", 7, Frankreich);
             Town Gießen = new Town("Gießen", 7, Frankreich);
             Town Nauheim = new Town("Nauheim", 7, Frankreich);
             Town Homburg = new Town("Homburg", 7, Frankreich);
-            Town Betzdorf = new Town("Betzdorf", 7, Frankreich);//20
+            Town Betzdorf = new Town("Betzdorf", 7, Frankreich);
             Town Waldbröll = new Town("Waldbröll", 7, Frankreich);
             Town Olpe = new Town("Olpe", 7, Frankreich);
             Town Meschede = new Town("Meschede", 7, Frankreich);
             Town Siegen = new Town("Siegen", 7, Frankreich);
-            Town Biedenkopf = new Town("Biedenkopf", 7, Frankreich);//25
+            Town Biedenkopf = new Town("Biedenkopf", 7, Frankreich);
             Town Dillenburg = new Town("Dillenburg", 7, Frankreich);
-            Town Marburg = new Town("Marburg", 7, Frankreich);
-            Town Frankenberg = new Town("Frankenberg", 7, Frankreich);
+            Town Marburg = new Town("Marburg", 7, Hannover);
+            Town Frankenberg = new Town("Frankenberg", 7, Hannover);
             Town Corbach = new Town("Corbach", 7, Frankreich);
-            Town Wildungen = new Town("Wildungen", 7, Frankreich);//30
+            Town Wildungen = new Town("Wildungen", 7, Hannover);
             Town Alsfeld = new Town("Alsfeld", 7, Frankreich);
-            Town Iserlohn = new Town("Iserlohn", 3, Frankreich);
+
+            //2.1 - Karo(Fr+Ha+Sa) von Kassel bis Sonneberg (6/24) - !!!
+            Town Fritzlar = new Town("Fritzlar", 2, Hannover);
+            Town Hünfeld = new Town("Hünfeld", 2, Frankreich);
+            Town Lauterbach = new Town("Lauterbach", 2, Frankreich);
             Town Fulda = new Town("Fulda", 2, Frankreich);
             Town Schlüchtern = new Town("Schlüchtern", 2, Hannover);
-            Town Gelnhausen = new Town("Gelnhausen", 3, Frankreich);//35
+            Fort Kassel = new Fort("Kassel", 2, Hannover, Frankreich);
+
+            //3.2 - Herz(Fr+Ha+Pr) von Greven bis Warburg (2/17) - !!!
+            Town Iserlohn = new Town("Iserlohn", 3, Frankreich);
+            Town Soest = new Town("Soest", 3, Preußen);
+            
+            //5.2 - Pik(Ha+Fr+Pr) von Wunstorf bis Nordhausen (4/26) - !!!
             Town Alfeld = new Town("Alfeld", 5, Hannover);
             Town Northeim = new Town("Northeim", 5, Hannover);         
             Town Münden = new Town("Münden", 5, Hannover);
-            Town Fritzlar = new Town("Fritzlar", 2, Hannover);
-            Town Erbach = new Town("Erbach", 3, Frankreich);//40
-            Town Miltenberg = new Town("Miltenberg", 3, Frankreich);
-            Town Hünfeld = new Town("Hünfeld", 2, Frankreich);
-            Town Lohr = new Town("Lohr", 5, Frankreich);
-            Town Lauterbach = new Town("Lauterbach", 2, Frankreich);
+            Fort Göttingen = new Fort("Göttingen", 5, Hannover, Frankreich);        
             
 
-            //Fort(Zielstädte/Festungen)
-            Fort Kassel = new Fort("Kassel", 2, Hannover, Frankreich);
-            Fort Göttingen = new Fort("Göttingen", 5, Hannover, Frankreich);
-
-
             //Nachbarstädte
+
+            //3.1 - 15 - check
             Bingen.towns.add(Mainz, Boppard);
             Mainz.towns.add(Bingen, Wiesbaden, Oppenheim);
             Wiesbaden.towns.add(Mainz, Limburg, Frankfurt);
             Boppard.towns.add(Koblenz, Bingen);
-            Koblenz.towns.add(Boppard, Limburg, Betzdorf);//5
-            Limburg.towns.add(Wiesbaden, Koblenz, Weilburg);
             Oppenheim.towns.add(Mainz, Worms);
             Worms.towns.add(Oppenheim, Mannheim);
             Mannheim.towns.add(Bensheim, Worms);
-            Bensheim.towns.add(Darmstadt, Mannheim, Erbach);//10
+            Bensheim.towns.add(Darmstadt, Mannheim, Erbach);
             Darmstadt.towns.add(Frankfurt, Bensheim, Aschaffenburg);
             Frankfurt.towns.add(Hanau, Wiesbaden, Darmstadt, Homburg);
             Hanau.towns.add(Frankfurt, Aschaffenburg, Gelnhausen, Nauheim);
             Aschaffenburg.towns.add(Hanau, Darmstadt, Lohr, Miltenberg);
-            Weilburg.towns.add(Limburg, Wetzlar);//15
+            Gelnhausen.towns.add(Schlüchtern, Hanau);
+            Erbach.towns.add(Bensheim, Miltenberg);
+            Miltenberg.towns.add(Erbach, lx);
+
+            //5.1 - 14 - check
+            Lohr.towns.add(Aschaffenburg, lx);
+            Gemünden.towns.add(Lohr, Würzburg, Kissingen, Schlüchtern);
+            Würzburg.towns.add(Gemünden, Schweinfurt, Wertheim, Kitzingen);
+            Wertheim.towns.add(Miltenberg, Ochsenfurt, Würzburg);
+            Ochsenfurt.towns.add(Wertheim, Kitzingen);
+            Kitzingen.towns.add(Würzburg, Ochsenfurt, Neustadt);
+            Neustadt.towns.add(Kitzingen, Erlangen, Bamberg);
+            Erlangen.towns.add(Neustadt, Forchheim, lx);
+            Forchheim.towns.add(Erlangen, Bamberg);
+            Bamberg.towns.add(Neustadt, Forchheim, Haßfurt, Coburg, lx);
+            Coburg.towns.add(Bamberg, lx);
+            Haßfurt.towns.add(Bamberg, Schweinfurt);
+            Schweinfurt.towns.add(Haßfurt, Würzburg, Kissingen);
+            Kissingen.towns.add(Gemünden, Schweinfurt, lx, lx);
+            
+            //7.1 - 19 - check
+            Koblenz.towns.add(Boppard, Limburg, Betzdorf);
+            Limburg.towns.add(Wiesbaden, Koblenz, Weilburg);
+            Weilburg.towns.add(Limburg, Wetzlar);
             Wetzlar.towns.add(Weilburg, Wetzlar, Dillenburg);
             Gießen.towns.add(Wetzlar, Nauheim, Marburg, Lauterbach);
             Nauheim.towns.add(Gießen, Homburg, Hanau);
             Homburg.towns.add(Nauheim, Frankfurt);
-            Betzdorf.towns.add(Waldbröll, Siegen, Koblenz);//20
+            Betzdorf.towns.add(Waldbröll, Siegen, Koblenz);
             Waldbröll.towns.add(Olpe, Betzdorf);
             Siegen.towns.add(Olpe, Biedenkopf, Dillenburg, Betzdorf);
             Biedenkopf.towns.add(Siegen, Marburg);
             Dillenburg.towns.add(Siegen, Marburg, Wetzlar);
-            Marburg.towns.add(Biedenkopf, Dillenburg, Gießen, Alsfeld, Frankenberg);//25
+            Marburg.towns.add(Biedenkopf, Dillenburg, Gießen, Alsfeld, Frankenberg);
             Alsfeld.towns.add(Marburg, Fritzlar, Hünfeld, Lauterbach);
             Frankenberg.towns.add(Corbach, Wildungen, Marburg);
             Corbach.towns.add(Frankenberg, lx, lx);
             Wildungen.towns.add(Frankenberg, Fritzlar);
-            Meschede.towns.add(Olpe, lx);//30
+            Meschede.towns.add(Olpe, lx);
             Olpe.towns.add(Meschede, Waldbröll, Siegen, Iserlohn);
-            Iserlohn.towns.add(Olpe, lx);
+            
+            //2.1 - 6/... - 
             Fulda.towns.add(Schlüchtern, Lauterbach, Hünfeld, lx);
             Schlüchtern.towns.add(Gelnhausen, Fulda, lx);
-            Gelnhausen.towns.add(Schlüchtern, Hanau);//35
+            Fritzlar.towns.add(Alsfeld, Kassel, Wildungen);
+            Kassel.towns.add(Fritzlar, Münden, lx, lx);
+            Lauterbach.towns.add(Fulda, Gießen, Alsfeld);
+            Hünfeld.towns.add(Fulda, Alsfeld, lx, lx);
+
+            //3.2 - 2/... - 
+            Iserlohn.towns.add(Olpe, lx);
+            Soest.towns.add(Iserlohn, lx, lx);
+            
+            
+            //5.2 - 4/... - 
             Alfeld.towns.add(Northeim, lx, lx);
             Northeim.towns.add(Alfeld, Göttingen, lx, lx);
             Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
-            Fritzlar.towns.add(Alsfeld, Kassel, Wildungen);
-            Kassel.towns.add(Fritzlar, Münden, lx, lx);//40
             Münden.towns.add(Kassel, Göttingen);
-            Lauterbach.towns.add(Fulda, Gießen, Alsfeld);
-            Lohr.towns.add(Aschaffenburg, lx);
-            Hünfeld.towns.add(Fulda, Alsfeld, lx, lx);
-            Erbach.towns.add(Bensheim, Miltenberg);//45
-            Miltenberg.towns.add(Erbach, lx);
-
+           
             
             General Cumberland = new General("Cumberland", Alfeld, Hannover); 
 
