@@ -298,7 +298,7 @@ namespace Fridolin
                       if (a.data.GetType() == typeof(Town))
                       {
                           tow = (Town)a.data;
-                          a.data.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha
+                          tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode
                       }
                   }
                   
@@ -311,6 +311,7 @@ namespace Fridolin
 
         public void reachDefense(int distance, Listing result) // methode bezüglich versorgung und abdeckung
         {
+            Town tow;
             //Console.WriteLine(name+": reachDefense("+distance+", "+result.resultString()+")");
             if (distance > 0)
             {
@@ -324,7 +325,11 @@ namespace Fridolin
                     }
                     if (distance > 1)
                     {
-                        a.data.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha
+                        if (a.data.GetType() == typeof(Town))
+                        {
+                            tow = (Town)a.data;
+                            tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode
+                        }
                     }
 
                 }
