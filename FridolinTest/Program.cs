@@ -298,7 +298,7 @@ namespace Fridolin
                       if (a.data.GetType() == typeof(Town))
                       {
                           tow = (Town)a.data;
-                          tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode
+                          tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
                       }
                   }
                   
@@ -328,13 +328,43 @@ namespace Fridolin
                         if (a.data.GetType() == typeof(Town))
                         {
                             tow = (Town)a.data;
-                            tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode
+                            tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
                         }
                     }
 
                 }
             }    
 
+        }
+        public Listing reachSupply(int distance) // Startmethode //noch unfertig
+        {
+            Town tow;
+
+            Listing result = new Listing();
+            if (distance > 0)
+            {
+                ListElement a = towns.head;
+                do
+                {
+                    a = a.next;
+                    if (!result.search(a.data))
+                    {
+                        result.add(a.data);
+                    }
+                    if (distance > 1)
+                    {
+                        if (a.data.GetType() == typeof(Town))
+                        {
+                            tow = (Town)a.data;
+                            tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
+                        }
+                    }
+
+                } while (a.next != null);
+                return result;
+
+            }
+            return result;
         }
     }// class Town Ende
 
@@ -360,7 +390,7 @@ namespace Fridolin
         public int maxArmies;
         public int cardsPerRound;
 
-        public Nation(String newName, int newMaxArmy, int cardsPerRound)
+        public Nation(String newName, int newMaxArmy, int newCardsPerRound)
         {
             generals = new Listing();
             forts = new Listing();
@@ -368,16 +398,25 @@ namespace Fridolin
             startTowns = new Listing();
             allies = new Listing();
             name = newName;
-
+            maxArmies = newMaxArmy;
+            cardsPerRound = newCardsPerRound;
         }
     }
 
     public class Card
     {
         public static int counter;
-        public int id;
-        public string tacticalColor;
+        public int id=0;
+        public int tacticalColor;
         public int value;
+        public Card(int newTacticalColor, int newValue)
+        {
+            // 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz
+            tacticalColor = newTacticalColor;
+            id = counter;
+            counter++;
+            newValue = value;
+        }
     }
 
  
@@ -469,21 +508,21 @@ namespace Fridolin
         {
             String result = "";
             ListElement a = head.next;
-            Town tow;
+            Town tow; //ab hier Hilfsvariablen erstellen, eig. wird immer nur eine davon gebraucht
             General gen;
             Nation nat;
             Baggage bag;
             Card car;
             for (int i = 1; i < number+1; i++)
             {
-                if (a.data.GetType() == typeof(Town))
+                if (a.data.GetType() == typeof(Town)) //Falls das Object ein Town ist,
                 {
-                    tow = (Town)a.data;
+                    tow = (Town)a.data; //dann spreche es nicht mehr als Object, sondern als Town an ;)
                     if (i == 1)
                     {
                         result += "Städte: ";
                     }
-                    result += i + ". " + tow.name + ", ";
+                    result += i + ". " + tow.name + ", "; //Weil object keine "name"-Variable hat...
                 }
                 if (a.data.GetType() == typeof(General))
                 {
@@ -508,7 +547,7 @@ namespace Fridolin
                     bag = (Baggage)a.data;
                     result += i + ". Tross" + ", ";
                 }
-                if (a.data.GetType() == typeof(Card))
+                if (a.data.GetType() == typeof(Card)) //Das könnte noch schöner gemacht werden.. z.b. mit tacticalColor anzeigen
                 {
                     car = (Card)a.data;
                     result += i + ". " + car.value + ", ";
