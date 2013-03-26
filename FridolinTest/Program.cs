@@ -190,6 +190,7 @@ namespace Fridolin
             
             //Tests
 
+            /*
             //System.Console.WriteLine(Koblenz.towns.resultString());
             //System.Console.WriteLine(Wiesbaden.towns.resultString());
             //System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
@@ -205,6 +206,8 @@ namespace Fridolin
             Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
             System.Console.WriteLine(Worms.reachSupply(6, Frankreich).resultString());
             System.Console.ReadKey();
+             */
+ 
         }
     }
 
@@ -427,7 +430,7 @@ namespace Fridolin
             tacticalColor = newTacticalColor;
             id = counter;
             counter++;
-            newValue = value;
+            newValue = value; //value element aus [2, 13] + {1-10}
         }
     }
 
