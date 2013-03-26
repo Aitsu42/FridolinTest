@@ -202,7 +202,7 @@ namespace Fridolin
             //System.Console.WriteLine(Schweden.allies.resultString());
             //System.Console.WriteLine(Fulda.towns.resultString());
             System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
-            Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden
+            Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
             System.Console.WriteLine(Worms.reachSupply(6, Frankreich).resultString());
             System.Console.ReadKey();
         }
