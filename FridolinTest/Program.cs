@@ -344,6 +344,7 @@ namespace Fridolin
             if (distance > 0)
             {
                 ListElement a = towns.head;
+                ListElement b;
                 do
                 {
                     a = a.next;
@@ -356,13 +357,12 @@ namespace Fridolin
                         if (a.data.GetType() == typeof(Town))
                         {
                             tow = (Town)a.data;
-                            tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
+                            b = tow.inTown.head;
+                            result.add(tow.reachSupply(distance - 1));
                         }
                     }
 
                 } while (a.next != null);
-                return result;
-
             }
             return result;
         }
