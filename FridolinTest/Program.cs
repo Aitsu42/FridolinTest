@@ -170,7 +170,7 @@ namespace Fridolin
             Hünfeld.towns.add(Fulda, Alsfeld, lx, lx);
 
             //3.2 - 2/... - 
-            Iserlohn.towns.add(Olpe, lx);
+            Iserlohn.towns.add(Olpe, Soest);
             Soest.towns.add(Iserlohn, lx, lx);
             
             
@@ -188,22 +188,22 @@ namespace Fridolin
             General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
             
             
+            //Tests
 
             //System.Console.WriteLine(Koblenz.towns.resultString());
             //System.Console.WriteLine(Wiesbaden.towns.resultString());
             //System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
             //System.Console.WriteLine(Wiesbaden.reachDefense(2).resultString());
             //System.Console.WriteLine(Wiesbaden.reachDefense(1).resultString());
-            //System.Console.ReadKey();
-
-
-            System.Console.WriteLine(Frankreich.generals.resultString());
-            System.Console.WriteLine(Hannover.generals.resultString());
-            System.Console.WriteLine(Preußen.generals.resultString());
-            System.Console.WriteLine(Schweden.generals.resultString());
-            System.Console.WriteLine(Schweden.allies.resultString());
-            System.Console.WriteLine(Fulda.towns.resultString());
-
+            //System.Console.WriteLine(Frankreich.generals.resultString());
+            //System.Console.WriteLine(Hannover.generals.resultString());
+            //System.Console.WriteLine(Preußen.generals.resultString());
+            //System.Console.WriteLine(Schweden.generals.resultString());
+            //System.Console.WriteLine(Schweden.allies.resultString());
+            //System.Console.WriteLine(Fulda.towns.resultString());
+            System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
+            Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden
+            System.Console.WriteLine(Worms.reachSupply(6, Frankreich).resultString());
             System.Console.ReadKey();
         }
     }
@@ -336,18 +336,20 @@ namespace Fridolin
             }    
 
         }
-        public Listing reachSupply(int distance) // Startmethode //noch unfertig
+        public Listing reachSupply(int distance, Nation nation) //ähnlich wie reachDefense, nur schaut es, ob gegnerische Charaktere den Nachschub blockieren
         {
             Town tow;
-
             Listing result = new Listing();
             if (distance > 0)
             {
                 ListElement a = towns.head;
                 ListElement b;
-                do
+                Character cha;
+                bool isEnemy;
+                while (a.next != null)
                 {
                     a = a.next;
+                    isEnemy = true;
                     if (!result.search(a.data))
                     {
                         result.add(a.data);
@@ -358,11 +360,21 @@ namespace Fridolin
                         {
                             tow = (Town)a.data;
                             b = tow.inTown.head;
-                            result.add(tow.reachSupply(distance - 1));
+                            if (b.next == null)
+                                isEnemy = false;
+                            while (b.next != null)
+                            {
+                                b = b.next;
+                                cha = (Character)b.data;
+                                if (cha.nation == nation || nation.allies.search(cha.nation))
+                                    isEnemy = false;
+                            }
+                            if (!isEnemy)
+                                result.add(tow.reachSupply(distance - 1, nation));
                         }
                     }
 
-                } while (a.next != null);
+                }
             }
             return result;
         }
@@ -431,7 +443,8 @@ namespace Fridolin
             while (temp.next != null) //solange temp nicht das letzte Listenelement ist, dann
             {
                 temp = temp.next; //gehe zum nächsten Listenelement
-                this.add(temp.data); //und füge dessen data zur eigentlichen Liste hinzu
+                if (!this.search(temp.data))
+                    this.add(temp.data); //und füge dessen data zur eigentlichen Liste hinzu
             }
 
         }
