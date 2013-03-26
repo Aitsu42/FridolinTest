@@ -425,6 +425,18 @@ namespace Fridolin
         public ListElement head;
         public int number = 0;
 
+        public void add(Listing newListing) //Methode um ganze Listen zusammenzufügen
+        {
+            ListElement temp = newListing.head;
+            while (temp.next != null) //solange temp nicht das letzte Listenelement ist, dann
+            {
+                temp = temp.next; //gehe zum nächsten Listenelement
+                this.add(temp.data); //und füge dessen data zur eigentlichen Liste hinzu
+            }
+
+        }
+
+
         public void add(Object newObject1)
         {
             ListElement newElement = new ListElement(newObject1);
