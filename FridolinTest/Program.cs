@@ -17,6 +17,7 @@ namespace Fridolin
             Nation Hannover = new Nation("Hannover",12, 2);
             Nation Preußen = new Nation("Preußen", 32, 7);
             Nation Schweden = new Nation("Schweden", 4, 1);
+            Nation Sachsen = new Nation("Sachsen", 0, 0); //Sry, weiß nicht wieviele Armeen Sachsen haben darf
 
 
             //Liste Allies
@@ -89,13 +90,31 @@ namespace Fridolin
             Town Wildungen = new Town("Wildungen", 7, Hannover);
             Town Alsfeld = new Town("Alsfeld", 7, Frankreich);
 
-            //2.1 - Karo(Fr+Ha+Sa) von Kassel bis Sonneberg (6/24) - !!!
+            //2.1 - Karo(Fr+Ha+Sa) von Kassel bis Sonneberg (24) - check
             Town Fritzlar = new Town("Fritzlar", 2, Hannover);
             Town Hünfeld = new Town("Hünfeld", 2, Frankreich);
             Town Lauterbach = new Town("Lauterbach", 2, Frankreich);
             Town Fulda = new Town("Fulda", 2, Frankreich);
             Town Schlüchtern = new Town("Schlüchtern", 2, Hannover);
             Fort Kassel = new Fort("Kassel", 2, Hannover, Frankreich);
+            Town Bebra = new Town("Bebra", 2, Hannover);
+            Town Hersfeld = new Town("Hersfeld", 2, Hannover);
+            Town Sontra = new Town("Sontra", 2, Hannover);
+            Town Eschwege = new Town("Eschwege", 2, Hannover);
+            Town Mühlhausen = new Town("Mühlhausen", 2, Frankreich);
+            Town Langensalza = new Town("Langensalza", 2, Sachsen);
+            Town Eisenach = new Town("Eisenach", 2, Frankreich);
+            Town Gotha = new Town("Gotha", 2, Frankreich);
+            Town Erfurt = new Town("Erfurt", 2, Frankreich);
+            Town Sömmerda = new Town("Sömmerda", 2, Frankreich);
+            Town Arnstadt = new Town("Arnstadt", 2, Frankreich);
+            Town Salzungen = new Town("Salzungen", 2, Frankreich);
+            Town Brückenau = new Town("Brückenau", 2, Frankreich);
+            Town Meiningen = new Town("Meiningen", 2, Frankreich);
+            Town Hildburghausen = new Town("Hildburghausen", 2, Frankreich);
+            Town Sonneberg = new Town("Sonneberg", 2, Frankreich);
+            Town Schmalkalden = new Town("Schmalkalden", 2, Hannover);
+            Town Suhl = new Town("Suhl", 2, Frankreich);
 
             //3.2 - Herz(Fr+Ha+Pr) von Greven bis Warburg (2/17) - !!!
             Town Iserlohn = new Town("Iserlohn", 3, Frankreich);
@@ -164,13 +183,31 @@ namespace Fridolin
             Meschede.towns.add(Olpe, lx);
             Olpe.towns.add(Meschede, Waldbröll, Siegen, Iserlohn);
             
-            //2.1 - 6/... - 
-            Fulda.towns.add(Schlüchtern, Lauterbach, Hünfeld, lx);
+            //2.1 - 24 - check
+            Fulda.towns.add(Schlüchtern, Lauterbach, Hünfeld, Brückenau);
             Schlüchtern.towns.add(Gelnhausen, Fulda, lx);
             Fritzlar.towns.add(Alsfeld, Kassel, Wildungen);
             Kassel.towns.add(Fritzlar, Münden, lx, lx);
             Lauterbach.towns.add(Fulda, Gießen, Alsfeld);
-            Hünfeld.towns.add(Fulda, Alsfeld, lx, lx);
+            Hünfeld.towns.add(Fulda, Alsfeld, Salzungen, Hersfeld);
+            Eschwege.towns.add(lx, Göttingen, Sontra);
+            Mühlhausen.towns.add(lx, lx, Langensalza);
+            Sontra.towns.add(Eschwege, Eisenach, Bebra);
+            Langensalza.towns.add(Mühlhausen, Gotha);
+            Bebra.towns.add(Kassel, Sontra, Hersfeld, Salzungen);
+            Eisenach.towns.add(Sontra, Gotha, Salzungen);
+            Sömmerda.towns.add(lx, Erfurt);
+            Gotha.towns.add(Langensalza, Erfurt, Eisenach);
+            Erfurt.towns.add(Sömmerda, Gotha, Arnstadt, lx);
+            Hersfeld.towns.add(Bebra, Hünfeld);
+            Salzungen.towns.add(Eisenach, Bebra, Hünfeld, Schmalkalden, Meiningen);
+            Arnstadt.towns.add(Erfurt, lx);
+            Meiningen.towns.add(Suhl, Salzungen, Hildburghausen, Kissingen);
+            Suhl.towns.add(Schmalkalden, Meiningen);
+            Brückenau.towns.add(Fulda, Kissingen);
+            Hildburghausen.towns.add(Meiningen, Sonneberg);
+            Sonneberg.towns.add(Hildburghausen, lx, Coburg, lx);
+            Schmalkalden.towns.add(Salzungen, Suhl);
 
             //3.2 - 2/... - 
             Iserlohn.towns.add(Olpe, Soest);
@@ -193,7 +230,7 @@ namespace Fridolin
             
             //Tests
 
-            /*
+           
             //System.Console.WriteLine(Koblenz.towns.resultString());
             //System.Console.WriteLine(Wiesbaden.towns.resultString());
             //System.Console.WriteLine(Dillenburg.reachDefense(3).resultString());
@@ -205,11 +242,11 @@ namespace Fridolin
             //System.Console.WriteLine(Schweden.generals.resultString());
             //System.Console.WriteLine(Schweden.allies.resultString());
             //System.Console.WriteLine(Fulda.towns.resultString());
-            System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
-            Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
-            System.Console.WriteLine(Worms.reachSupply(6, Frankreich).resultString());
+            //System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
+            //Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
+            System.Console.WriteLine(Kassel.reachSupply(10, Frankreich).resultString()); //Rapha, probier mal den Befehl und schraube langsam die Zahl höher xD mein Rechner hat bei 15 ~ 5 min gebraucht xD
             System.Console.ReadKey();
-             */
+             
  
         }
     }
@@ -233,8 +270,14 @@ namespace Fridolin
             movePoints = newMovePoints;
         }
 
-        public void move()
-        { 
+        public void move(Town targetTown) //Fang doch schonmal an hierdran zu arbeiten
+        {
+            //Methode um eine Figur ein Feld weiter zu schieben
+            //mir fällt auf, wir brauchen für den move Befehl gar keine reachBefehle... uups xD
+            //Sollte eig gar nicht so schwer sein... Fang einfach an zu schreiben und vor allem, trau dich :)
+            // Meine erste Überlegung wäre: Was muss ich überprüfen? 
+            //z.b. ob die Städte nebeneinander sind, oder ob da nicht nen gegnerischer General drinsteht... (Tipp: sowas ähnliches hab ich schon im reachSupply gemacht)
+            //und dann natürlich die Figur eins weiterschieben ;)
             
         }        
     }
