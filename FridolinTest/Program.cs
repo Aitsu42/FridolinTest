@@ -8,6 +8,9 @@ namespace Fridolin
     class Program
     {
         static void Main(string[] args)
+
+
+            //Achja: Ich benutze grade kein FB, mein Skypename ist maddin2030 - lösch das am besten, nachdem du mich geadded hast xD
         {
             //Nationen
             Nation Frankreich = new Nation("Frankreich", 20, 3); //Karte 4 auswählen noch basteln!
