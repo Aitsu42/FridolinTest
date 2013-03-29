@@ -10,14 +10,13 @@ namespace Fridolin
         static void Main(string[] args)
 
 
-            //Achja: Ich benutze grade kein FB, mein Skypename ist maddin2030 - lösch das am besten, nachdem du mich geadded hast xD
         {
             //Nationen
             Nation Frankreich = new Nation("Frankreich", 20, 3); //Karte 4 auswählen noch basteln!
             Nation Hannover = new Nation("Hannover",12, 2);
             Nation Preußen = new Nation("Preußen", 32, 7);
             Nation Schweden = new Nation("Schweden", 4, 1);
-            Nation Sachsen = new Nation("Sachsen", 0, 0); //Sry, weiß nicht wieviele Armeen Sachsen haben darf
+            Nation Sachsen = new Nation("Sachsen", 6, 1);
 
 
             //Liste Allies
@@ -25,6 +24,7 @@ namespace Fridolin
             Preußen.allies.add(Hannover);
             Frankreich.allies.add(Schweden); //für special szenario
             Schweden.allies.add(Frankreich); //für special szenario
+            Sachsen.allies.add(Schweden, Frankreich);
 
 
             
@@ -226,6 +226,8 @@ namespace Fridolin
             General Chevert = new General("Chevert", Iserlohn, Frankreich);
             General Soubise = new General("Soubise", Fulda, Frankreich);
             General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
+
+            General vHildburghausen = new General("vHildburghausen", Hildburghausen, Sachsen); //kann nicht Hildburghausen heißen, da die stadt schon so heißt... :(
             
             
             //Tests
@@ -244,7 +246,7 @@ namespace Fridolin
             //System.Console.WriteLine(Fulda.towns.resultString());
             //System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
             //Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
-            System.Console.WriteLine(Kassel.reachSupply(10, Frankreich).resultString()); //Rapha, probier mal den Befehl und schraube langsam die Zahl höher xD mein Rechner hat bei 15 ~ 5 min gebraucht xD
+            System.Console.WriteLine(Kassel.reachSupply(15, Frankreich).resultString()); //15 schaffe ich in unter 20 sek :) aber 20 dauert länger als 7 min (hab da abgebrochen), aber wir brauchen ja max. 6 ;)
             System.Console.ReadKey();
              
  
