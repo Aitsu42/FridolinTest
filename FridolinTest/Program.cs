@@ -387,7 +387,7 @@ namespace Fridolin
             }    
 
         }
-        public Listing reachSupply(int distance, Nation nation) //ähnlich wie reachDefense, nur schaut es, ob gegnerische Charaktere den Nachschub blockieren
+        public Listing reachSupply(int distance, Nation nationOfGeneral) //ähnlich wie reachDefense, nur schaut es, ob gegnerische Charaktere den Nachschub blockieren
         {
             Town tow;
             Listing result = new Listing();
@@ -396,11 +396,11 @@ namespace Fridolin
                 ListElement a = towns.head;
                 ListElement b;
                 Character cha;
-                bool isEnemy;
+                bool isEnemyInTown;
                 while (a.next != null)
                 {
                     a = a.next;
-                    isEnemy = true;
+                    isEnemyInTown = true;
                     if (!result.search(a.data))
                     {
                         result.add(a.data);
@@ -412,16 +412,16 @@ namespace Fridolin
                             tow = (Town)a.data;
                             b = tow.inTown.head;
                             if (b.next == null)
-                                isEnemy = false;
+                                isEnemyInTown = false;
                             while (b.next != null)
                             {
                                 b = b.next;
                                 cha = (Character)b.data;
-                                if (cha.nation == nation || nation.allies.search(cha.nation))
-                                    isEnemy = false;
+                                if (cha.nation == nationOfGeneral || nationOfGeneral.allies.search(cha.nation))
+                                    isEnemyInTown = false;
                             }
-                            if (!isEnemy)
-                                result.add(tow.reachSupply(distance - 1, nation));
+                            if (!isEnemyInTown)
+                                result.add(tow.reachSupply(distance - 1, nationOfGeneral));
                         }
                     }
 
