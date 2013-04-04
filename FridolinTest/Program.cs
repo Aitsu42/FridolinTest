@@ -220,15 +220,7 @@ namespace Fridolin
             Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
             Münden.towns.add(Kassel, Göttingen);
 
-            //Hauptstraßenlisten
-            //Falls alle Städte einer Verbindung in einer der Listen drin ist, dann ist die gesamte Verbindung Hauptstraße
-            Listing mainStreets = new Listing(); //Da werden jetzt verschiedene Listen eingespeichert - eine zweidimensionale Liste *yeah*
-            Listing wormsKassel = new Listing();
-            mainStreets.add((Object)wormsKassel);
-            wormsKassel.add(Worms, Oppenheim, Mainz, Wiesbaden, Frankfurt);
-            wormsKassel.add(Darmstadt, Bensheim, Mannheim, Homburg, Nauheim);
-            wormsKassel.add(Gießen, Marburg, Alsfeld, Fritzlar, Kassel); //Nur als Beispiel, muss noch weitergeführt werden.. 
-           
+      
             
             General Cumberland = new General("Cumberland", Alfeld, Hannover); 
 
@@ -255,8 +247,9 @@ namespace Fridolin
             //System.Console.WriteLine(Schweden.allies.resultString());
             //System.Console.WriteLine(Fulda.towns.resultString());
             //System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
-            //Wiesbaden.inTown.add(Cumberland); // Das sollte auskommentiert werden weil es unsere Daten kaputt macht ;)
-            System.Console.WriteLine(Kassel.reachSupply(15, Frankreich).resultString()); //15 schaffe ich in unter 20 sek :) aber 20 dauert länger als 7 min (hab da abgebrochen), aber wir brauchen ja max. 6 ;)
+            System.Console.WriteLine(Iserlohn.inTown.resultString());
+            //System.Console.WriteLine(Kassel.reachSupply(15, Frankreich).resultString()); //15 schaffe ich in unter 20 sek :) aber 20 dauert länger als 7 min (hab da abgebrochen), aber wir brauchen ja max. 6 ;)
+            System.Console.WriteLine(Olpe.reachMove(12, Hannover).resultString());
             System.Console.ReadKey();
              
  
@@ -282,6 +275,7 @@ namespace Fridolin
             position = newTown;
             movePoints = newMovePoints;
             currentMovePoints = newMovePoints;
+            newTown.inTown.add(this);
         }
 
         public void move()//Ich hab die Movemethode doch nochmal konzeptionell anders gestaltet... siehe Diagramme in der Dropbox
@@ -323,6 +317,7 @@ namespace Fridolin
         public Nation nation;
         public Listing towns;
         public Listing inTown;
+        public Listing mainStreet;
 
         public Town(String newName, int newTacticalColor, Nation newNation)
         {
@@ -333,6 +328,7 @@ namespace Fridolin
             nation = newNation;
             towns = new Listing();
             inTown = new Listing();
+            mainStreet = new Listing();
         }
     
          public Listing reachDefense(int distance) // Startmethode
@@ -352,7 +348,7 @@ namespace Fridolin
                   }
                   if (distance > 1)
                   {
-                      if (a.data.GetType() == typeof(Town))
+                      if (a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort))
                       {
                           tow = (Town)a.data;
                           tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
@@ -382,7 +378,7 @@ namespace Fridolin
                     }
                     if (distance > 1)
                     {
-                        if (a.data.GetType() == typeof(Town))
+                        if (a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort))
                         {
                             tow = (Town)a.data;
                             tow.reachDefense(distance - 1, result); //KEINE AHNUNG - Rapha -- Genau wie bei der resultString-Methode - Maddin
@@ -413,7 +409,7 @@ namespace Fridolin
                     }
                     if (distance > 1)
                     {
-                        if (a.data.GetType() == typeof(Town))
+                        if (a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort))
                         {
                             tow = (Town)a.data;
                             b = tow.inTown.head;
@@ -434,6 +430,89 @@ namespace Fridolin
                 }
             }
             return result;
+        }
+        public Listing reachMove(int reachMovePoints, Nation nationOfGeneral) //ähnlich wie reachSupply
+        //reachMovePoints: Anzahl restlicher Bewegungspunkte der Einheit, Kosten: 4 für Straßen, nur 3 für Hauptstraßen
+        {
+            Town tow;
+            Listing result = new Listing();
+            Listing t;
+            ListElement a = mainStreet.head;
+            int unitType; //0:Kein Gegner, 1:ein eigener General, 2:zwei eigene Generäle, 3:drei eigene Generäle, 4:Verbündeter, 5:gegnerischer Tross, 6:gegnerischer General, negative Werte: Fehler
+            if (reachMovePoints >= 3) //HauptstraßenTeil
+            {
+                while (a.next != null)
+                {
+                    a = a.next;
+                    if (a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort))
+                    {
+                            tow = (Town)a.data;
+                            unitType = tow.unitTypeInTown(nationOfGeneral);
+                            if (((unitType >= 0 && unitType <= 2) || unitType == 5) && !result.search(a.data)) //Der General darf in die Stadt laufen
+                               result.add(a.data);
+                                                            
+                            if (unitType == 0)
+                               result.add(tow.reachMove(reachMovePoints - 3, nationOfGeneral));
+
+                            if (unitType < 0)
+                                System.Console.WriteLine("Warnung: Die reachMove Methode hatte Probleme den stationierten Einheiten in der Stadt " + tow.name + " zu finden(HauptstraßenTeil)"); 
+                    }
+                }
+            }
+            a = towns.head;
+            if(reachMovePoints >= 4) //Nebenstraßenteil
+            {
+                while (a.next != null)
+                {
+                    a = a.next;
+                    if ((a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort)) && !this.mainStreet.search(a.data))
+                    {
+                        tow = (Town)a.data;
+                        unitType = tow.unitTypeInTown(nationOfGeneral);
+                        System.Console.WriteLine("NebenstraßenTeil reachMove in " + this.name + " unitType der Stadt "+ tow.name+" ist " + unitType+" movePoints: "+ reachMovePoints);
+                        if (((unitType >= 0 && unitType <= 2) || unitType == 5) && !result.search(a.data)) //Der General darf in die Stadt laufen
+                            result.add(a.data);
+
+                        if (unitType == 0) //Wenn die Stadt leer ist, dann schaue weiter
+                        {
+                            t = tow.reachMove(reachMovePoints - 4, nationOfGeneral);
+                            System.Console.WriteLine("Z476: "+tow.name+": "+t.resultString());
+                            result.add(t);
+                        }
+                        if (unitType < 0)
+                            System.Console.WriteLine("Warnung: Die reachMove Methode hatte Probleme den stationierten Einheiten in der Stadt " + tow.name + " zu finden(NebenstraßenTeil)");
+                    }
+                }
+            }
+            return result;
+        }
+        public int unitTypeInTown(Nation nationOfGeneral) //Schaut was für Character in der Stadt sind
+        {
+            //0:Kein Gegner, 1:ein eigener General, 2:zwei eigene Generäle, 3:drei eigene Generäle, 4:Verbündeter, 5:gegnerischer Tross, 6:gegnerischer General, negative Werte: Fehler
+            Character cha;
+            ListElement b = inTown.head;
+            int unitType = -1;
+            if (b.next == null)
+                unitType = 0;
+            while (b.next != null)
+            {
+                b = b.next;
+                cha = (Character)b.data;
+                if (cha.nation == nationOfGeneral && unitType >= 0 && unitType <= 3)
+                    if (unitType == -1)
+                        unitType = 1;
+                    else if (unitType == 3)
+                        unitType = -2;
+                    else
+                        unitType++;
+                else if (nationOfGeneral.allies.search(cha.nation))
+                    unitType = 4;
+                else if (cha.GetType() == typeof(General))
+                    unitType = 6;
+                else if (cha.GetType() == typeof(Baggage))
+                    unitType = 5;
+            }
+            return unitType;
         }
     }// class Town Ende
 
@@ -609,7 +688,7 @@ namespace Fridolin
             Card car;
             for (int i = 1; i < number+1; i++)
             {
-                if (a.data.GetType() == typeof(Town)) //Falls das Object ein Town ist,
+                if (a.data.GetType() == typeof(Town) || a.data.GetType() == typeof(Fort)) //Falls das Object ein Town ist,
                 {
                     tow = (Town)a.data; //dann spreche es nicht mehr als Object, sondern als Town an ;)
                     if (i == 1)
