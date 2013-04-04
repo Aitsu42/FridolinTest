@@ -220,7 +220,26 @@ namespace Fridolin
             Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
             Münden.towns.add(Kassel, Göttingen);
 
-      
+            //Hauptstraßen
+
+            //Von Worms, mit Kringel nach Göttingen
+            Worms.mainStreet.add(Oppenheim, Mannheim);
+            Oppenheim.mainStreet.add(Worms, Mainz);
+            Mainz.mainStreet.add(Oppenheim, Wiesbaden);
+            Wiesbaden.mainStreet.add(Mainz, Frankfurt);
+            Frankfurt.mainStreet.add(Wiesbaden, Hanau, Darmstadt, Homburg);
+            Darmstadt.mainStreet.add(Frankfurt, Bensheim);
+            Bensheim.mainStreet.add(Darmstadt, Mannheim);
+            Mannheim.mainStreet.add(Worms, Bensheim);
+            Homburg.mainStreet.add(Nauheim, Frankfurt);
+            Nauheim.mainStreet.add(Homburg, Gießen);
+            Gießen.mainStreet.add(Nauheim, Wetzlar, Marburg);
+            Marburg.mainStreet.add(Gießen, Alsfeld);
+            Alsfeld.mainStreet.add(Marburg, Fritzlar);
+            Fritzlar.mainStreet.add(Kassel, Alsfeld);
+            Kassel.mainStreet.add(Fritzlar, Münden);
+            Münden.mainStreet.add(Kassel, Göttingen);
+            Göttingen.mainStreet.add(Münden, Northeim);
             
             General Cumberland = new General("Cumberland", Alfeld, Hannover); 
 
@@ -247,9 +266,9 @@ namespace Fridolin
             //System.Console.WriteLine(Schweden.allies.resultString());
             //System.Console.WriteLine(Fulda.towns.resultString());
             //System.Console.WriteLine(Worms.reachSupply(6,Frankreich).resultString());
-            System.Console.WriteLine(Iserlohn.inTown.resultString());
+            //System.Console.WriteLine(Iserlohn.inTown.resultString());
             //System.Console.WriteLine(Kassel.reachSupply(15, Frankreich).resultString()); //15 schaffe ich in unter 20 sek :) aber 20 dauert länger als 7 min (hab da abgebrochen), aber wir brauchen ja max. 6 ;)
-            System.Console.WriteLine(Olpe.reachMove(12, Hannover).resultString());
+            System.Console.WriteLine(Kassel.reachMove(12, Hannover).resultString());
             System.Console.ReadKey();
              
  
@@ -436,7 +455,6 @@ namespace Fridolin
         {
             Town tow;
             Listing result = new Listing();
-            Listing t;
             ListElement a = mainStreet.head;
             int unitType; //0:Kein Gegner, 1:ein eigener General, 2:zwei eigene Generäle, 3:drei eigene Generäle, 4:Verbündeter, 5:gegnerischer Tross, 6:gegnerischer General, negative Werte: Fehler
             if (reachMovePoints >= 3) //HauptstraßenTeil
@@ -469,15 +487,14 @@ namespace Fridolin
                     {
                         tow = (Town)a.data;
                         unitType = tow.unitTypeInTown(nationOfGeneral);
-                        System.Console.WriteLine("NebenstraßenTeil reachMove in " + this.name + " unitType der Stadt "+ tow.name+" ist " + unitType+" movePoints: "+ reachMovePoints);
+                        // System.Console.WriteLine("NebenstraßenTeil reachMove in " + this.name + " unitType der Stadt "+ tow.name+" ist " + unitType+" movePoints: "+ reachMovePoints);
                         if (((unitType >= 0 && unitType <= 2) || unitType == 5) && !result.search(a.data)) //Der General darf in die Stadt laufen
                             result.add(a.data);
 
                         if (unitType == 0) //Wenn die Stadt leer ist, dann schaue weiter
                         {
-                            t = tow.reachMove(reachMovePoints - 4, nationOfGeneral);
-                            System.Console.WriteLine("Z476: "+tow.name+": "+t.resultString());
-                            result.add(t);
+                            // System.Console.WriteLine("Z476: "+tow.name+": "+t.resultString());
+                            result.add(tow.reachMove(reachMovePoints - 4, nationOfGeneral));
                         }
                         if (unitType < 0)
                             System.Console.WriteLine("Warnung: Die reachMove Methode hatte Probleme den stationierten Einheiten in der Stadt " + tow.name + " zu finden(NebenstraßenTeil)");
