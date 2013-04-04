@@ -219,6 +219,15 @@ namespace Fridolin
             Northeim.towns.add(Alfeld, Göttingen, lx, lx);
             Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
             Münden.towns.add(Kassel, Göttingen);
+
+            //Hauptstraßenlisten
+            //Falls alle Städte einer Verbindung in einer der Listen drin ist, dann ist die gesamte Verbindung Hauptstraße
+            Listing mainStreets = new Listing(); //Da werden jetzt verschiedene Listen eingespeichert - eine zweidimensionale Liste *yeah*
+            Listing wormsKassel = new Listing();
+            mainStreets.add((Object)wormsKassel);
+            wormsKassel.add(Worms, Oppenheim, Mainz, Wiesbaden, Frankfurt);
+            wormsKassel.add(Darmstadt, Bensheim, Mannheim, Homburg, Nauheim);
+            wormsKassel.add(Gießen, Marburg, Alsfeld, Fritzlar, Kassel); //Nur als Beispiel, muss noch weitergeführt werden.. 
            
             
             General Cumberland = new General("Cumberland", Alfeld, Hannover); 
@@ -227,7 +236,8 @@ namespace Fridolin
             General Soubise = new General("Soubise", Fulda, Frankreich);
             General Richelieu = new General("Richelieu", Iserlohn, Frankreich);
 
-            General vHildburghausen = new General("vHildburghausen", Hildburghausen, Sachsen); //kann nicht Hildburghausen heißen, da die stadt schon so heißt... :(
+            General GeneralHildburghausen = new General("Hildburghausen", Hildburghausen, Sachsen); //kann nicht Hildburghausen heißen, da die stadt schon so heißt... :(
+                                                                                                    //Du kannst den String so nennen... nur die Variable nicht ;)
             
             
             //Tests
@@ -262,6 +272,7 @@ namespace Fridolin
         public Town position;
         public Nation nation;
         public int movePoints;
+        public int currentMovePoints;
 
         public Character(Town newTown, Nation newNation, int newMovePoints)
         { 
@@ -270,16 +281,11 @@ namespace Fridolin
             nation = newNation;
             position = newTown;
             movePoints = newMovePoints;
+            currentMovePoints = newMovePoints;
         }
 
-        public void move(Town targetTown) //Fang doch schonmal an hierdran zu arbeiten
-        {
-            //Methode um eine Figur ein Feld weiter zu schieben
-            //mir fällt auf, wir brauchen für den move Befehl gar keine reachBefehle... uups xD
-            //Sollte eig gar nicht so schwer sein... Fang einfach an zu schreiben und vor allem, trau dich :)
-            // Meine erste Überlegung wäre: Was muss ich überprüfen? 
-            //z.b. ob die Städte nebeneinander sind, oder ob da nicht nen gegnerischer General drinsteht... (Tipp: sowas ähnliches hab ich schon im reachSupply gemacht)
-            //und dann natürlich die Figur eins weiterschieben ;)
+        public void move()//Ich hab die Movemethode doch nochmal konzeptionell anders gestaltet... siehe Diagramme in der Dropbox
+        {//Vllt sollten wir erst einmal die anderen Befehle machen
             
         }        
     }
@@ -452,6 +458,7 @@ namespace Fridolin
         public Listing allies;
         public int maxArmies;
         public int cardsPerRound;
+        public int cardDismissing;
 
         public Nation(String newName, int newMaxArmy, int newCardsPerRound)
         {
@@ -464,6 +471,12 @@ namespace Fridolin
             maxArmies = newMaxArmy;
             cardsPerRound = newCardsPerRound;
         }
+        public void drawCards() //Methode am Anfang eines Nationenzugs um alle Karten zu ziehen und evtl. wieder wegzulegen
+        {
+            //TODO
+            //for cardsPerRound
+            //nextCard()
+        }
     }
 
     public class Card
@@ -474,11 +487,16 @@ namespace Fridolin
         public int value;
         public Card(int newTacticalColor, int newValue)
         {
-            // 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz
-            tacticalColor = newTacticalColor;
+            tacticalColor = newTacticalColor;// 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz
             id = counter;
             counter++;
             newValue = value; //value element aus [2, 13] + {1-10}
+        }
+        public static Card nextCard() //nächste Karte vom Stapel ziehen
+        {
+            Card newCard = new Card(0, 0);//Bullshit ;)
+            //Todo: entscheiden ob wir es so wie im Spiel mit 4 seperaten Kartenstapeln machen wollen oder anders
+            return newCard;
         }
     }
 
