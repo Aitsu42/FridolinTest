@@ -114,16 +114,52 @@ namespace Fridolin
             Town Schmalkalden = new Town("Schmalkalden", 2, Hannover);
             Town Suhl = new Town("Suhl", 2, Frankreich);
 
-            //3.2 - Herz(Fr+Ha+Pr) von Greven bis Warburg (2/17) - !!!
+            //3.1 - Herz(Fr+Ha+Pr) von Greven bis Warburg (20/20) 
             Town Iserlohn = new Town("Iserlohn", 3, Frankreich);
             Town Soest = new Town("Soest", 3, Preußen);
+            Town Lippstadt = new Town("Lippstadt", 3, Frankreich);
+            Town Büren = new Town("Büren", 3, Frankreich);
+            Town Brilon = new Town("Brilon", 3, Frankreich);
+            Town Warburg = new Town("Warburg", 3, Hannover);
+            Town Driburg = new Town("Driburg", 3, Frankreich);
+            Town Paderborn = new Town("Paderborn", 3, Frankreich);
+            Town Detmold = new Town("Detmold", 3, Frankreich);
+            Town Gütersloh = new Town("Gütersloh", 3, Frankreich);
+            Town Münster = new Town("Münster", 3, Frankreich);
+            Town Lemgo = new Town("Lemgo", 3, Frankreich);
+            Town Greven = new Town("Greven", 3, Frankreich);
+            Town Rinteln = new Town("Rinteln", 3, Frankreich);
+            Town Herford = new Town("Herford", 3, Preußen);
+            Town Hamm = new Town("Hamm", 3, Preußen);
+            Town Bielefeld = new Town("Bielefeld", 3, Preußen);
+            Fort Minden = new Fort("Minden", 3, Preußen, Frankreich);
+            Town Osnabrück = new Town("Osnabrück", 3, Frankreich);
+            Town Rheine = new Town("Rheine", 3, Frankreich);
+            
+            //4.1 - Kreuz(FR+Ha+Pr) von Diepholz bis Emden
 
+            Town Lingen = new Town("Lingen", 7, Preußen);
+            Town Bramsche = new Town("Bramsche", 7, Frankreich);
+            Fort Diebholz = new Fort("Diepholz", 7, Hannover, Frankreich);
+
+            //2.2 Karo, Nienburg bis Lübeck
+            Town Nienburg = new Town("Nienburg", 2, Hannover);
+            
+            
+            
+            
+            
+            
+            
             //5.2 - Pik(Ha+Fr+Pr) von Wunstorf bis Nordhausen (4/26) - !!!
             Town Alfeld = new Town("Alfeld", 5, Hannover);
             Town Northeim = new Town("Northeim", 5, Hannover);
             Town Münden = new Town("Münden", 5, Hannover);
             Fort Göttingen = new Fort("Göttingen", 5, Hannover, Frankreich);
-
+            Town Hofgeismar = new Town("Hofgeismar", 5, Hannover);
+            Town Holzminden = new Town("Holzminden", 5, Hannover);
+            Town Pyrmont = new Town("Pyrmont", 5, Hannover);
+            Town Wunstorf = new Town("Wunstorf", 5, Hannover);
 
             //Nachbarstädte
 
@@ -181,7 +217,7 @@ namespace Fridolin
             Meschede.towns.add(Olpe, lx);
             Olpe.towns.add(Meschede, Waldbröll, Siegen, Iserlohn);
 
-            //2.1 - 24 - check
+            //2.2 - 24 - check
             Fulda.towns.add(Schlüchtern, Lauterbach, Hünfeld, Brückenau);
             Schlüchtern.towns.add(Gelnhausen, Fulda, lx);
             Fritzlar.towns.add(Alsfeld, Kassel, Wildungen);
@@ -209,14 +245,34 @@ namespace Fridolin
 
             //3.2 - 2/... - 
             Iserlohn.towns.add(Olpe, Soest);
-            Soest.towns.add(Iserlohn, lx, lx);
-
+            Soest.towns.add(Iserlohn, Hamm, Lippstadt);
+            Hamm.towns.add(Münster, Gütersloh, Soest);
+            Lippstadt.towns.add(Soest, Büren);
+            Büren.towns.add(Lippstadt, Paderborn, Brilon);
+            Brilon.towns.add(Corbach, Meschede, Büren);
+            Warburg.towns.add(Corbach, Hofgeismar, Paderborn);
+            Paderborn.towns.add(Driburg, Paderborn, Holzminden);
+            Münster.towns.add(Gütersloh, Hamm, Greven);
+            Gütersloh.towns.add(Münster, Bielefeld, Hamm, Paderborn);
+            Detmold.towns.add(Paderborn, Pyrmont);
+            Bielefeld.towns.add(Gütersloh, Herford);
+            Lemgo.towns.add(Pyrmont, Herford);
+            Greven.towns.add(Rheine, Osnabrück, Münster);
+            Herford.towns.add(Lemgo, Bielefeld, Minden, Osnabrück);
+            Rinteln.towns.add(Lemgo, Minden);
+            Rheine.towns.add(Greven, Osnabrück, Lingen);
+            Osnabrück.towns.add(Rheine, Greven, Herford, Minden, Diebholz);
+            Osnabrück.towns.add(Bramsche);  //Osnabrück hat 6 Nachbarn Oo
+            Minden.towns.add(Rinteln, Herford, Osnabrück, Wunstorf, Nienburg);
 
             //5.2 - 4/... - 
             Alfeld.towns.add(Northeim, lx, lx);
             Northeim.towns.add(Alfeld, Göttingen, lx, lx);
             Göttingen.towns.add(Northeim, Münden, lx, lx, lx);
             Münden.towns.add(Kassel, Göttingen);
+
+            
+            
 
             //Hauptstraßen
 
@@ -232,12 +288,26 @@ namespace Fridolin
             Homburg.mainStreet.add(Nauheim, Frankfurt);
             Nauheim.mainStreet.add(Homburg, Gießen);
             Gießen.mainStreet.add(Nauheim, Wetzlar, Marburg);
+            Wetzlar.mainStreet.add(Gießen);
             Marburg.mainStreet.add(Gießen, Alsfeld);
             Alsfeld.mainStreet.add(Marburg, Fritzlar);
             Fritzlar.mainStreet.add(Kassel, Alsfeld);
             Kassel.mainStreet.add(Fritzlar, Münden);
             Münden.mainStreet.add(Kassel, Göttingen);
             Göttingen.mainStreet.add(Münden, Northeim);
+            Northeim.mainStreet.add(Göttingen, Alfeld);
+            Alfeld.mainStreet.add(Northeim, Pyrmont);
+
+            //Olpe bis Pyrmont
+            Olpe.mainStreet.add(Iserlohn);
+            Iserlohn.mainStreet.add(Olpe, Soest);
+            Soest.mainStreet.add(Iserlohn, Hamm);
+            Hamm.mainStreet.add(Soest, Gütersloh);
+            Gütersloh.mainStreet.add(Hamm, Bielefeld);
+            Bielefeld.mainStreet.add(Gütersloh, Herford);
+            Herford.mainStreet.add(Bielefeld, Lemgo);
+            Pyrmont.mainStreet.add(Lemgo, Alfeld, lx);
+
 
             General Cumberland = new General("Cumberland", Alfeld, Hannover);
 
@@ -270,7 +340,7 @@ namespace Fridolin
             //System.Console.WriteLine(Iserlohn.inTown.resultString());
             //System.Console.WriteLine(Kassel.reachSupply(15, Frankreich).resultString()); //15 schaffe ich in unter 20 sek :) aber 20 dauert länger als 7 min (hab da abgebrochen), aber wir brauchen ja max. 6 ;)
             //System.Console.WriteLine(Kassel.reachMove(12, Hannover).resultString());
-            System.Console.WriteLine(TestG.currentMovePoints+" "+ TestG.position.reachMove(12, Frankreich).resultString());
+           /* System.Console.WriteLine(TestG.currentMovePoints+" "+ TestG.position.reachMove(12, Frankreich).resultString());
             System.Console.WriteLine(Kassel.reachDefense(3, Hannover));
             TestG.move(Münden);
             TestG.move(Göttingen);
@@ -279,7 +349,17 @@ namespace Fridolin
             General TestG2 = new General("TestG2", Fritzlar, Hannover);
             TestG2.move(Kassel);
             TestG2.move(Fritzlar);
-            System.Console.WriteLine(Kassel.conquered);
+            System.Console.WriteLine(Kassel.conquered);*/
+            Listing Liste = new Listing(1);
+            System.Console.WriteLine(Liste.resultString());
+            Liste.shuffle();
+            System.Console.WriteLine(Liste.resultString());
+                        Liste.shuffle();
+                        System.Console.WriteLine(Liste.resultString());
+                            Liste.shuffle();
+            System.Console.WriteLine(Liste.resultString());
+                            Liste.shuffle();
+            System.Console.WriteLine(Liste.resultString());
             System.Console.ReadKey();
 
 
@@ -635,7 +715,7 @@ namespace Fridolin
             tacticalColor = newTacticalColor;// 2:=Karo 3:=Herz 5:=Pik 7:=Kreuz
             id = counter;
             counter++;
-            newValue = value; //value element aus [2, 13] + {1-10}
+            value = newValue; //value element aus [2, 13] + {1-10} value 0, tackticalColor 0 -> Joker
         }
         public static Card nextCard() //nächste Karte vom Stapel ziehen
         {
@@ -742,6 +822,59 @@ namespace Fridolin
             head = new ListElement(null);
         }
 
+        public Listing(int Type)
+        {
+            Card car;
+            head = new ListElement(null);
+            if (Type == 1) //neuer Kartenstapel
+            {
+                int i = 2;
+                do
+                {
+                    for (int j = 2; j <= 13; j++)
+                    {
+                        car = new Card(i, j);
+                        this.add(car); 
+                    }
+                    switch(i)
+                    {
+                        case 2:
+                            i=3; break;
+                        case 3:
+                            i=5; break;
+                        case 5:
+                            i=7; break;
+                        default:
+                            i=0; break;
+                    }
+                }while(i!=0);
+                this.add(new Card(0, 0));//Joker
+                this.add(new Card(0, 0));
+            }
+        }
+
+        public void shuffle() //mischt eine Liste zufällig durch
+        {
+            ListElement lisE;
+            Random random = new Random();
+            int position;
+            int oldNumber = this.number;
+            Listing lis = new Listing();
+            lis.head.next = this.head.next;
+            this.head.next = null;
+            this.number = 0;
+            for (int i = oldNumber; i > 0; i--)
+            {
+                position = random.Next(1, i+1);
+                lisE = lis.head;
+                for (int j = 1; j <= position; j++)
+                {
+                    lisE = lisE.next;
+                }
+                this.add(lisE.data);
+                lis.remove(lisE.data);
+            }
+        }
 
         public String resultString() //debugMethode, um Listen auszugeben
         {
